@@ -2117,20 +2117,19 @@ function eliminarRegistro(id, tipo) {
                         ${alertMessage ? `<div class="alert alert-${alertType}">${alertMessage}</div>` : ""}
                         
                         <div class="role-selector">
-                            <div class="role-option ${selectedRole === "gerente" ? "selected" : ""}" onclick="selectLoginRole('gerente')" id="roleGerente">
-                                <div class="role-icon">👔</div>
-                                <div>Gerente</div>
-                            </div>
-                            <div class="role-option ${selectedRole === "asesor" ? "selected" : ""}" onclick="selectLoginRole('asesor')" id="roleAsesor">
-                                <div class="role-icon">👩‍💼</div>
-                                <div>Asesor</div>
-                            </div>
-                            <div class="role-option ${selectedRole === "cliente" ? "selected" : ""}" onclick="selectLoginRole('cliente')" id="roleCliente">
-                                <div class="role-icon">👤</div>
-                                <div>Cliente</div>
-                            </div>
-                        </div>
-                        
+    <div class="role-option ${selectedRole === "gerente" ? "selected" : ""}" onclick="selectLoginRole('gerente')" id="roleGerente">
+        <div class="role-icon">👔</div>
+        <div>Gerente</div>
+    </div>
+    <div class="role-option ${selectedRole === "asesor" ? "selected" : ""}" onclick="selectLoginRole('asesor')" id="roleAsesor">
+        <div class="role-icon">👩‍💼</div>
+        <div>Asesor</div>
+    </div>
+    <div class="role-option ${selectedRole === "cliente" ? "selected" : ""}" onclick="window.open('https://ciudadmovilcolombia.com/mi-cuenta/', '_blank'); selectLoginRole('cliente');" id="roleCliente">
+        <div class="role-icon">👤</div>
+        <div>Cliente</div>
+    </div>
+</div>
                         <form onsubmit="return handleLogin(event)">
                             <div class="form-horizontal">
                                 <div class="form-group">
