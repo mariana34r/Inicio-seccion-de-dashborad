@@ -1,0 +1,2169 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* 
+ * ESTILOS ENCAPSULADOS PARA WORDPRESS
+ * Prefijo: e-dashboard- (electric dashboard)
+ * Esto previene conflictos con estilos del tema
+ */
+
+/* Reset solo para nuestro dashboard */
+.e-dashboard-vehiculos-electricos * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.e-dashboard-vehiculos-electricos {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.e-dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.e-dashboard-vehiculos-electricos header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-subtitle {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+}
+
+/* Resumen Ejecutivo */
+.e-dashboard-vehiculos-electricos .e-resumen-ejecutivo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.e-dashboard-vehiculos-electricos .e-metrica-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.e-dashboard-vehiculos-electricos .e-metrica-card:hover {
+    transform: translateY(-5px);
+}
+
+.e-dashboard-vehiculos-electricos .e-metrica-valor {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.e-dashboard-vehiculos-electricos .e-metrica-label {
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-asesores {
+    color: #3498db;
+}
+
+.e-dashboard-vehiculos-electricos .e-sucursales {
+    color: #9b59b6;
+}
+
+.e-dashboard-vehiculos-electricos .e-ventas {
+    color: #27ae60;
+}
+
+.e-dashboard-vehiculos-electricos .e-clientes {
+    color: #e74c3c;
+}
+
+/* Tabla de Ventas y Prospectos por Asesor - CORREGIDO */
+.e-dashboard-vehiculos-electricos .e-tabla-ventas-prospectos {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos .e-tabla-ventas-prospectos h3 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.e-dashboard-vehiculos-electricos .e-tabla-doble-container {
+    overflow-x: auto;
+}
+
+.e-dashboard-vehiculos-electricos .e-tabla-completa {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+}
+
+/* Encabezados generales - fondo azul oscuro */
+.e-dashboard-vehiculos-electricos .e-tabla-completa th {
+    background: #2c3e50 !important;
+    color: white !important;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+/* PROSPECTOS - fondo naranja */
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr:first-child th[colspan="3"]:last-child {
+    background: #e67e22 !important;
+    color: white !important;
+}
+
+/* PPTO, Real, % - fondo naranja en segunda fila */
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr.e-separador th:nth-last-child(3),
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr.e-separador th:nth-last-child(2),
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr.e-separador th:nth-last-child(1) {
+    background: #e67e22 !important;
+    color: white !important;
+}
+
+/* Celdas de datos */
+.e-dashboard-vehiculos-electricos .e-tabla-completa td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ecf0f1;
+    text-align: center;
+    color: #000000;
+}
+
+/* Clases para celdas de datos - VENTAS */
+.e-dashboard-vehiculos-electricos .e-tabla-completa .e-columna-ventas {
+    background-color: #e8f6f3;
+}
+
+/* Clases para celdas de datos - PROSPECTOS */
+.e-dashboard-vehiculos-electricos .e-tabla-completa .e-columna-prospectos {
+    background-color: #fef9e7;
+}
+
+/* Asegurar fondos para celdas de datos VENTAS */
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr td.e-columna-ventas {
+    background-color: #e8f6f3 !important;
+}
+
+/* Asegurar fondos para celdas de datos PROSPECTOS */
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr td.e-columna-prospectos {
+    background-color: #fef9e7 !important;
+}
+
+/* Fila separadora */
+.e-dashboard-vehiculos-electricos .e-tabla-completa .e-separador {
+    background: #34495e;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Fila de totales */
+.e-dashboard-vehiculos-electricos .e-tabla-completa .e-total-row {
+    background-color: #2c3e50;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Efecto hover en filas */
+.e-dashboard-vehiculos-electricos .e-tabla-completa tr:hover {
+    background: #f8f9fa;
+}
+
+.e-dashboard-vehiculos-electricos .e-tabla-completa .e-total-row:hover {
+    background-color: #2c3e50;
+}
+
+/* Colores para porcentajes */
+.e-dashboard-vehiculos-electricos .e-porcentaje-bueno {
+    color: #27ae60 !important;
+    font-weight: bold;
+}
+
+.e-dashboard-vehiculos-electricos .e-porcentaje-medio {
+    color: #f39c12 !important;
+    font-weight: bold;
+}
+
+.e-dashboard-vehiculos-electricos .e-porcentaje-bajo {
+    color: #e74c3c !important;
+    font-weight: bold;
+}
+
+/* Estadísticas */
+.e-dashboard-vehiculos-electricos .e-estadisticas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-card h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-table th {
+    background: #2c3e50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-table tr:hover {
+    background: #f8f9fa;
+}
+
+.e-dashboard-vehiculos-electricos .e-total-row {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-top: 2px solid #2c3e50;
+}
+
+/* Sedes */
+.e-dashboard-vehiculos-electricos .e-sedes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.e-dashboard-vehiculos-electricos .e-sede-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos .e-sede-card h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.e-dashboard-vehiculos-electricos .e-sede-info {
+    margin-top: 10px;
+}
+
+.e-dashboard-vehiculos-electricos .e-info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 5px 0;
+}
+
+.e-dashboard-vehiculos-electricos .e-info-item .e-valor {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Filtros */
+.e-dashboard-vehiculos-electricos .e-filtros-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos .e-filtros-container h3 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.e-dashboard-vehiculos-electricos .e-filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.e-dashboard-vehiculos-electricos .e-filtro-group {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.e-dashboard-vehiculos-electricos .e-filtro-group h4 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.e-dashboard-vehiculos-electricos select {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+    background: white;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.e-dashboard-vehiculos-electricos select:last-child {
+    margin-bottom: 0;
+}
+
+/* Tablas */
+.e-dashboard-vehiculos-electricos .e-tabla-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+.e-dashboard-vehiculos-electricos .e-tabla-titulo {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.e-dashboard-vehiculos-electricos .e-ventas-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.e-dashboard-vehiculos-electricos .e-ventas-table th {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+.e-dashboard-vehiculos-electricos .e-ventas-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.e-dashboard-vehiculos-electricos .e-ventas-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Badges */
+.e-dashboard-vehiculos-electricos .e-tipo-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.e-dashboard-vehiculos-electricos .e-moto-badge {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.e-dashboard-vehiculos-electricos .e-patineta-badge {
+    background: #e8f4fc;
+    color: #3498db;
+}
+
+.e-dashboard-vehiculos-electricos .e-carro-badge {
+    background: #f4e8fc;
+    color: #9b59b6;
+}
+
+.e-dashboard-vehiculos-electricos .e-bicicleta-badge {
+    background: #fef9e7;
+    color: #f39c12;
+}
+
+.e-dashboard-vehiculos-electricos .e-fuente-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-digital-badge {
+    background: #e8f6f3;
+    color: #1abc9c;
+}
+
+.e-dashboard-vehiculos-electricos .e-referido-badge {
+    background: #fef9e7;
+    color: #f39c12;
+}
+
+.e-dashboard-vehiculos-electricos .e-playa-badge {
+    background: #fdedec;
+    color: #e74c3c;
+}
+
+.e-dashboard-vehiculos-electricos .e-sala-badge {
+    background: #e8f4fd;
+    color: #3498db;
+}
+
+.e-dashboard-vehiculos-electricos .e-clasificacion-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-exploracion-badge {
+    background: #ebf5fb;
+    color: #3498db;
+}
+
+.e-dashboard-vehiculos-electricos .e-evaluacion-badge {
+    background: #fef5e7;
+    color: #f39c12;
+}
+
+.e-dashboard-vehiculos-electricos .e-decision-badge {
+    background: #eafaf1;
+    color: #27ae60;
+}
+
+.e-dashboard-vehiculos-electricos .e-tipo-cliente-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-nuevo-badge {
+    background: #e8f8f5;
+    color: #1abc9c;
+}
+
+.e-dashboard-vehiculos-electricos .e-cm-badge {
+    background: #f4ecf7;
+    color: #9b59b6;
+}
+
+.e-dashboard-vehiculos-electricos .e-no-moto-badge {
+    background: #e8f4fd;
+    color: #3498db;
+}
+
+.e-dashboard-vehiculos-electricos .e-no-cm-badge {
+    background: #fbeee6;
+    color: #e67e22;
+}
+
+/* Clientes */
+.e-dashboard-vehiculos-electricos .e-clientes-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.e-dashboard-vehiculos-electricos .e-clientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+}
+
+.e-dashboard-vehiculos-electricos .e-clientes-table th {
+    background: #2c3e50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.e-dashboard-vehiculos-electricos .e-clientes-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.e-dashboard-vehiculos-electricos .e-clientes-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Estadísticas del Asesor */
+.e-dashboard-vehiculos-electricos .e-estadisticas-asesor-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadisticas-asesor-container.active {
+    display: block;
+}
+
+.e-dashboard-vehiculos-electricos .e-asesor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.e-dashboard-vehiculos-electricos .e-asesor-header h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-cerrar-estadisticas {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-cerrar-estadisticas:hover {
+    background: #c0392b;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadisticas-seccion {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadisticas-seccion h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #dee2e6;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-item:last-child {
+    border-bottom: none;
+}
+
+.e-dashboard-vehiculos-electricos .e-estadistica-item .e-valor {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Gráfico de Barras */
+.e-dashboard-vehiculos-electricos .e-barras-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.e-dashboard-vehiculos-electricos .e-barras-container h4 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-item {
+    margin-bottom: 15px;
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-progreso {
+    height: 25px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-progreso-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+/* Colores para diferentes tipos */
+.e-dashboard-vehiculos-electricos .e-barra-moto {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-patineta {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-carro {
+    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+.e-dashboard-vehiculos-electricos .e-barra-bicicleta {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+/* Footer */
+.e-dashboard-vehiculos-electricos footer {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .e-dashboard-vehiculos-electricos .e-filtros-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .e-dashboard-vehiculos-electricos .e-estadisticas-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .e-dashboard-vehiculos-electricos .e-estadisticas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Asegurar que solo nuestro dashboard use estas fuentes */
+.e-dashboard-vehiculos-electricos,
+.e-dashboard-vehiculos-electricos *:not(i) {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+</style>
+
+<div class="e-dashboard-vehiculos-electricos">
+    <div class="e-dashboard-container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Dashboard de Ventas</h1>
+            <p class="e-subtitle">Vehículos Eléctricos - Monitoreo en Tiempo Real</p>
+        </header>
+        
+        <div class="e-resumen-ejecutivo">
+            <div class="e-metrica-card e-asesores">
+                <i class="fas fa-users fa-2x"></i>
+                <div class="e-metrica-valor">6</div>
+                <div class="e-metrica-label">Número de Asesores</div>
+            </div>
+            <div class="e-metrica-card e-sucursales">
+                <i class="fas fa-store fa-2x"></i>
+                <div class="e-metrica-valor">5</div>
+                <div class="e-metrica-label">Número de Sucursales</div>
+            </div>
+            <div class="e-metrica-card e-ventas">
+                <i class="fas fa-car fa-2x"></i>
+                <div class="e-metrica-valor">52</div>
+                <div class="e-metrica-label">Ventas Totales</div>
+            </div>
+            <div class="e-metrica-card e-clientes">
+                <i class="fas fa-user-check fa-2x"></i>
+                <div class="e-metrica-valor">358</div>
+                <div class="e-metrica-label">Total de Clientes</div>
+            </div>
+        </div>
+
+        <!-- Nueva tabla de ventas y prospectos por asesor CORREGIDA -->
+        <div class="e-tabla-ventas-prospectos">
+            <h3><i class="fas fa-chart-bar"></i> Ventas y Prospectos por Asesor</h3>
+            <div class="e-tabla-doble-container">
+                <table class="e-tabla-completa">
+                    <thead>
+                        <tr>
+                            <th>Asesor</th>
+                            <th colspan="2" class="e-columna-ventas">VENTAS</th>
+                            <th colspan="3" class="e-columna-ventas">EFECTIVIDAD VENTAS</th>
+                            <th colspan="3" class="e-columna-prospectos">PROSPECTOS</th>
+                        </tr>
+                        <tr class="e-separador">
+                            <th></th>
+                            <th class="e-columna-ventas">PPTO ($)</th>
+                            <th class="e-columna-ventas">Real ($)</th>
+                            <th class="e-columna-ventas">PPTO</th>
+                            <th class="e-columna-ventas">Real</th>
+                            <th class="e-columna-ventas">%</th>
+                            <th class="e-columna-prospectos">PPTO</th>
+                            <th class="e-columna-prospectos">Real</th>
+                            <th class="e-columna-prospectos">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dina Luz</td>
+                            <td class="e-columna-ventas">$ 47.350.000</td>
+                            <td class="e-columna-ventas">$ 8.040.000</td>
+                            <td class="e-columna-ventas">15</td>
+                            <td class="e-columna-ventas">1</td>
+                            <td class="e-columna-ventas e-porcentaje-bajo">6,67%</td>
+                            <td class="e-columna-prospectos">88</td>
+                            <td class="e-columna-prospectos">41</td>
+                            <td class="e-columna-prospectos e-porcentaje-medio">46,47%</td>
+                        </tr>
+                        <tr>
+                            <td>Fabiola</td>
+                            <td class="e-columna-ventas">$ 268.475.000</td>
+                            <td class="e-columna-ventas">$ 72.410.000</td>
+                            <td class="e-columna-ventas">17</td>
+                            <td class="e-columna-ventas">8</td>
+                            <td class="e-columna-ventas e-porcentaje-medio">47,06%</td>
+                            <td class="e-columna-prospectos">100</td>
+                            <td class="e-columna-prospectos">50</td>
+                            <td class="e-columna-prospectos e-porcentaje-medio">50,50%</td>
+                        </tr>
+                        <tr>
+                            <td>Yolanda</td>
+                            <td class="e-columna-ventas">$ 268.475.000</td>
+                            <td class="e-columna-ventas">$ 20.877.400</td>
+                            <td class="e-columna-ventas">17</td>
+                            <td class="e-columna-ventas">15</td>
+                            <td class="e-columna-ventas e-porcentaje-bueno">88,24%</td>
+                            <td class="e-columna-prospectos">100</td>
+                            <td class="e-columna-prospectos">59</td>
+                            <td class="e-columna-prospectos e-porcentaje-bueno">59,00%</td>
+                        </tr>
+                        <tr>
+                            <td>Lina</td>
+                            <td class="e-columna-ventas">$ 71.025.000</td>
+                            <td class="e-columna-ventas">$ 30.550.000</td>
+                            <td class="e-columna-ventas">20</td>
+                            <td class="e-columna-ventas">9</td>
+                            <td class="e-columna-ventas e-porcentaje-medio">45,00%</td>
+                            <td class="e-columna-prospectos">118</td>
+                            <td class="e-columna-prospectos">68</td>
+                            <td class="e-columna-prospectos e-porcentaje-bueno">57,00%</td>
+                        </tr>
+                        <tr>
+                            <td>Adriana</td>
+                            <td class="e-columna-ventas">$ 56.820.000</td>
+                            <td class="e-columna-ventas">$ 29.965.000</td>
+                            <td class="e-columna-ventas">15</td>
+                            <td class="e-columna-ventas">6</td>
+                            <td class="e-columna-ventas e-porcentaje-medio">40,00%</td>
+                            <td class="e-columna-prospectos">88</td>
+                            <td class="e-columna-prospectos">72</td>
+                            <td class="e-columna-prospectos e-porcentaje-bueno">81,60%</td>
+                        </tr>
+                        <tr>
+                            <td>Sandra</td>
+                            <td class="e-columna-ventas">$ 61.555.000</td>
+                            <td class="e-columna-ventas">$ 31.335.000</td>
+                            <td class="e-columna-ventas">16</td>
+                            <td class="e-columna-ventas">6</td>
+                            <td class="e-columna-ventas e-porcentaje-medio">37,50%</td>
+                            <td class="e-columna-prospectos">94</td>
+                            <td class="e-columna-prospectos">33</td>
+                            <td class="e-columna-prospectos e-porcentaje-medio">35,06%</td>
+                        </tr>
+                        <tr class="e-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td class="e-columna-ventas"><strong>$ 773.700.000</strong></td>
+                            <td class="e-columna-ventas"><strong>$ 193.177.400</strong></td>
+                            <td class="e-columna-ventas"><strong>100</strong></td>
+                            <td class="e-columna-ventas"><strong>45</strong></td>
+                            <td class="e-columna-ventas"><strong>45,00%</strong></td>
+                            <td class="e-columna-prospectos"><strong>588</strong></td>
+                            <td class="e-columna-prospectos"><strong>323</strong></td>
+                            <td class="e-columna-prospectos"><strong>54,93%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="e-estadisticas-container">
+            <div class="e-estadistica-card">
+                <h3><i class="fas fa-chart-bar"></i> Ventas por Tipo de Vehículo</h3>
+                <table class="e-estadistica-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-motorcycle"></i> Moto</td>
+                            <td>45</td>
+                            <td>86.54%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-scooter"></i> Patineta</td>
+                            <td>6</td>
+                            <td>11.54%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-car"></i> Carro</td>
+                            <td>1</td>
+                            <td>1.92%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-bicycle"></i> Bicicleta</td>
+                            <td>0</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr class="e-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>358</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="e-estadistica-card">
+                <h3><i class="fas fa-users"></i> Fuentes de Clientes</h3>
+                <table class="e-estadistica-table">
+                    <thead>
+                        <tr>
+                            <th>Fuente</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-store-alt"></i> Sala</td>
+                            <td>36</td>
+                            <td>70.6%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-desktop"></i> Digital</td>
+                            <td>9</td>
+                            <td>17.6%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-user-friends"></i> Referido</td>
+                            <td>8</td>
+                            <td>15.7%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-store"></i> Playa</td>
+                            <td>0</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr class="e-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>358</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="e-estadistica-card">
+                <h3><i class="fas fa-chart-line"></i> Clasificación de Clientes</h3>
+                <table class="e-estadistica-table">
+                    <thead>
+                        <tr>
+                            <th>Etapa</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-search"></i> Exploración</td>
+                            <td>190</td>
+                            <td>53.07%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-clipboard-check"></i> Evaluación</td>
+                            <td>77</td>
+                            <td>21.51%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-check-circle"></i> Decisión</td>
+                            <td>91</td>
+                            <td>25.42%</td>
+                        </tr>
+                        <tr class="e-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>358</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="e-estadistica-card">
+                <h3><i class="fas fa-user-tag"></i> Tipo de Cliente</h3>
+                <table class="e-estadistica-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-motorcycle"></i> Cliente no moto eléctrica</td>
+                            <td>45</td>
+                            <td>86.3%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-city"></i> Cliente cuidad movil</td>
+                            <td>3</td>
+                            <td>5.9%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-user-plus"></i> Cliente de otra marca</td>
+                            <td>4</td>
+                            <td>7.8%</td>
+                        </tr>
+                        <tr class="e-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>358</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="e-sedes-container">
+            <div class="e-sede-card">
+                <h3><i class="fas fa-store"></i> Cra 33 Cabecera</h3>
+                <div class="e-sede-info">
+                    <div class="e-info-item">
+                        <span>Asesores:</span>
+                        <span class="e-valor">Yolanda, Fabiola</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Efectividad:</span>
+                        <span class="e-valor">33</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Prospectos:</span>
+                        <span class="e-valor">112</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>% Efectividad:</span>
+                        <span class="e-valor">63.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="e-sede-card">
+                <h3><i class="fas fa-store"></i> Giron</h3>
+                <div class="e-sede-info">
+                    <div class="e-info-item">
+                        <span>Asesores:</span>
+                        <span class="e-valor">Lina</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Efectividad:</span>
+                        <span class="e-valor">8</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Prospectos:</span>
+                        <span class="e-valor">68</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>% Efectividad:</span>
+                        <span class="e-valor">15.4%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="e-sede-card">
+                <h3><i class="fas fa-store"></i> Barrancabermeja</h3>
+                <div class="e-sede-info">
+                    <div class="e-info-item">
+                        <span>Asesores:</span>
+                        <span class="e-valor">Adriana</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Efectividad:</span>
+                        <span class="e-valor">6</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Prospectos:</span>
+                        <span class="e-valor">79</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>% Efectividad:</span>
+                        <span class="e-valor">11.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="e-sede-card">
+                <h3><i class="fas fa-store"></i> La Concordia</h3>
+                <div class="e-sede-info">
+                    <div class="e-info-item">
+                        <span>Asesores:</span>
+                        <span class="e-valor">Sandra</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Efectividad:</span>
+                        <span class="e-valor">7</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Prospectos:</span>
+                        <span class="e-valor">97</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>% Efectividad:</span>
+                        <span class="e-valor">13.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="e-sede-card">
+                <h3><i class="fas fa-store"></i> Valledupar</h3>
+                <div class="e-sede-info">
+                    <div class="e-info-item">
+                        <span>Asesores:</span>
+                        <span class="e-valor">Dina Luz</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Efectividad:</span>
+                        <span class="e-valor">1</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>Prospectos:</span>
+                        <span class="e-valor">41</span>
+                    </div>
+                    <div class="e-info-item">
+                        <span>% Efectividad:</span>
+                        <span class="e-valor">1.9%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas del Asesor Seleccionado -->
+        <div class="e-estadisticas-asesor-container" id="e-estadisticasAsesor">
+            <div class="e-asesor-header">
+                <h3 id="e-nombreAsesorEstadisticas">Estadísticas del Asesor</h3>
+                <button class="e-cerrar-estadisticas" id="e-cerrarEstadisticas">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+            
+            <div class="e-estadisticas-grid">
+                <div class="e-estadisticas-seccion">
+                    <h4><i class="fas fa-motorcycle"></i> Distribución de Ventas</h4>
+                    <div class="e-estadistica-item">
+                        <span>Motos:</span>
+                        <span class="e-valor" id="e-estMotos">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Patinetas:</span>
+                        <span class="e-valor" id="e-estPatinetas">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Carros:</span>
+                        <span class="e-valor" id="e-estCarros">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Bicicletas:</span>
+                        <span class="e-valor" id="e-estBicicletas">0</span>
+                    </div>
+                </div>
+                
+                <div class="e-estadisticas-seccion">
+                    <h4><i class="fas fa-users"></i> Fuente de Clientes</h4>
+                    <div class="e-estadistica-item">
+                        <span>Sala:</span>
+                        <span class="e-valor" id="e-estSala">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Digital:</span>
+                        <span class="e-valor" id="e-estDigital">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Referido:</span>
+                        <span class="e-valor" id="e-estReferido">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Playa:</span>
+                        <span class="e-valor" id="e-estPlaya">0</span>
+                    </div>
+                </div>
+                
+                <div class="e-estadisticas-seccion">
+                    <h4><i class="fas fa-chart-line"></i> Clasificación</h4>
+                    <div class="e-estadistica-item">
+                        <span>Exploración:</span>
+                        <span class="e-valor" id="e-estExploracion">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Evaluación:</span>
+                        <span class="e-valor" id="e-estEvaluacion">0</span>
+                    </div>
+                    <div class="e-estadistica-item">
+                        <span>Decisión:</span>
+                        <span class="e-valor" id="e-estDecision">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="e-barras-container">
+                <h4><i class="fas fa-chart-bar"></i> Referencias Vendidas</h4>
+                <div id="e-graficoReferencias">
+                    <!-- Aquí se generarán las barras dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <div class="e-filtros-container">
+            <h3><i class="fas fa-filter"></i> Filtros de Ventas</h3>
+            <div class="e-filtros-grid">
+                <div class="e-filtro-group">
+                    <h4><i class="fas fa-user-tie"></i> Filtrar por Asesor</h4>
+                    <select id="e-filtro-asesor">
+                        <option value="all">Todos</option>
+                        <option value="YOLANDA">Yolanda</option>
+                        <option value="SANDRA">Sandra</option>
+                        <option value="LINA">Lina</option>
+                        <option value="FABIOLA">Fabiola</option>
+                        <option value="ADRIANA">Adriana</option>
+                        <option value="DINA LUZ">Dina Luz</option>
+                    </select>
+                </div>
+                
+                <div class="e-filtro-group">
+                    <h4><i class="fas fa-store"></i> Filtrar por Sede</h4>
+                    <select id="e-filtro-sede">
+                        <option value="all">Todas</option>
+                        <option value="Cra 33 Cabecera">Cra 33 Cabecera</option>
+                        <option value="La Concordia">La Concordia</option>
+                        <option value="Giron">Giron</option>
+                        <option value="Barrancabermeja">Barrancabermeja</option>
+                        <option value="Valledupar">Valledupar</option>
+                    </select>
+                </div>
+                
+                <div class="e-filtro-group">
+                    <h4><i class="fas fa-car"></i> Tipo de Vehículo</h4>
+                    <select id="e-filtro-tipo">
+                        <option value="all">Todos</option>
+                        <option value="moto">Moto</option>
+                        <option value="patineta">Patineta</option>
+                        <option value="carro">Carro</option>
+                        <option value="bicicleta">Bicicleta</option>
+                    </select>
+                    
+                    <h4><i class="fas fa-tag"></i> Marca/Referencia</h4>
+                    <select id="e-filtro-referencia">
+                        <option value="all">Todas</option>
+                        <!-- Las opciones se llenarán dinámicamente -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="e-tabla-container">
+            <div class="e-tabla-titulo">
+                <h3><i class="fas fa-table"></i> Ventas Realizadas</h3>
+                <div id="e-contadorVentas">Mostrando 52 ventas</div>
+            </div>
+            <table class="e-ventas-table" id="e-tablaVentas">
+                <thead>
+                    <tr>
+                        <th>Asesor</th>
+                        <th>Cliente</th>
+                        <th>Cédula</th>
+                        <th>Celular</th>
+                        <th>Tipo Vehículo</th>
+                        <th>Referencia</th>
+                        <th>Agencia</th>
+                        <th>Fuente</th>
+                        <th>Clasificación</th>
+                        <th>Tipo Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Ventas se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="e-clientes-container">
+            <div class="e-tabla-titulo">
+                <h3><i class="fas fa-database"></i> Base de Datos de Clientes</h3>
+            </div>
+            <div class="e-filtros-grid" style="margin-bottom: 20px;">
+                <div class="e-filtro-group">
+                    <h4><i class="fas fa-user-tie"></i> Filtrar por Asesor</h4>
+                    <select id="e-filtro-cliente-asesor">
+                        <option value="all">Todos</option>
+                        <option value="YOLANDA">Yolanda</option>
+                        <option value="SANDRA">Sandra</option>
+                        <option value="LINA">Lina</option>
+                        <option value="FABIOLA">Fabiola</option>
+                        <option value="ADRIANA">Adriana</option>
+                        <option value="DINA LUZ">Dina Luz</option>
+                    </select>
+                </div>
+                
+                <div class="e-filtro-group">
+                    <h4><i class="fas fa-car"></i> Tipo de Vehículo</h4>
+                    <select id="e-filtro-cliente-tipo">
+                        <option value="all">Todos</option>
+                        <option value="moto">Moto</option>
+                        <option value="patineta">Patineta</option>
+                        <option value="carro">Carro</option>
+                        <option value="bicicleta">Bicicleta</option>
+                    </select>
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="e-clientes-table" id="e-tablaClientes">
+                    <thead>
+                        <tr>
+                            <th>Asesor</th>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Cédula</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                            <th>Tipo Cliente</th>
+                            <th>Fuente</th>
+                            <th>Tipo Vehículo</th>
+                            <th>Referencia</th>
+                            <th>Forma de Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody id="e-clientesBody">
+                        <!-- Clientes se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>Dashboard de Ventas - Vehículos Eléctricos | Actualizado: Enero 2026</p>
+            <p>Sistema Integrado de Gestión Comercial</p>
+        </footer>
+    </div>
+</div>
+
+<script>
+// ========================================================
+// DATOS COMPLETOS DE VENTAS - 52 VENTAS EN TOTAL
+// ========================================================
+const e_ventas = [
+    // YOLANDA - 17 ventas
+    { asesor: "YOLANDA", cliente: "TATIANA CRISTANCHO", cedula: "1100960993", celular: "3115747666", tipo: "carro", referencia: "XIAOMA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "NELSON ESPINOSA", cedula: "91255205", celular: "3188067551", tipo: "moto", referencia: "REVOO C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "JAIRO ALBERTO QUINTERO", cedula: "1051655034", celular: "3135000422", tipo: "patineta", referencia: "E2 PLUS II", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "JULIETH TATIANA FOREZ", cedula: "1098823914", celular: "3209694175", tipo: "moto", referencia: "MINI BWS", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "NYLSON MUÑOZ", cedula: "91073357", celular: "3169298300", tipo: "moto", referencia: "OMEGA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "MILADY NORIEGA BECERRA", cedula: "1065343371", celular: "3027789172", tipo: "patineta", referencia: "PATINETA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "DIEGO RICARDO PATIÑO", cedula: "105688399", celular: "3107995933", tipo: "patineta", referencia: "PATINETA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "GLORIA CECILIA HERRERA", cedula: "37747321", celular: "3102450334", tipo: "moto", referencia: "BWS", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "NOHELIA AGUDELO CUERVO", cedula: "11093588161", celular: "3203153835", tipo: "moto", referencia: "BWS", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "ADELINA DUARTE", cedula: "63360203", celular: "3175399021", tipo: "moto", referencia: "PIXEL", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "evaluacion", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "LUZ MARINA ALMANZA", cedula: "", celular: "3187731216", tipo: "moto", referencia: "BWS NEGRA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "WILLIAN ALVAREZ", cedula: "", celular: "3183134242", tipo: "moto", referencia: "AGUILA MAX", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "exploracion", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "CARLOS JULIO SANCHEZ", cedula: "", celular: "3165759905", tipo: "moto", referencia: "REVOO C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "EUNICE DEL CARMEN AGUILERA", cedula: "33311974", celular: "3114288938", tipo: "patineta", referencia: "SCOOTER E2 PLUS", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "JUAN SEBASTIAN QUINTERO PACHECO", cedula: "1005326598", celular: "3167801489", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "LISETH PAOLA CRISTANCHO LIZARAZO", cedula: "1193578107", celular: "3007148248", tipo: "moto", referencia: "DELTAD", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "YOLANDA", cliente: "JORGE ARMANDO MONTAÑEZ", cedula: "1098603386", celular: "3104272503", tipo: "moto", referencia: "AGUILA MAX", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    
+    // FABIOLA - 14 ventas
+    { asesor: "FABIOLA", cliente: "LAURA", cedula: "", celular: "3153737995", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "LUZ ALEAN", cedula: "", celular: "3044385558", tipo: "moto", referencia: "AGUIL MAX", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "MIRIAN DEL PILAR GARCIA", cedula: "", celular: "3214806528", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "evaluacion", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "ARNOLD FABIAN CONTRERAS", cedula: "", celular: "3232360619", tipo: "moto", referencia: "S5", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "Karen", cedula: "", celular: "3163377289", tipo: "moto", referencia: "GOLF", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "MISAEL HERNANDEZ", cedula: "", celular: "3223216642", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "referido", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "RUBIELA ARIZA", cedula: "", celular: "3188749493", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "referido", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "PEDRO DUARTE", cedula: "", celular: "3163788520", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "exploracion", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "ALCIRA VARGAS MEJIA", cedula: "", celular: "3118028264", tipo: "moto", referencia: "C32", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "JOSE CORZO", cedula: "", celular: "3021066182", tipo: "moto", referencia: "PYTHON", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "LAURA JIMENA", cedula: "", celular: "", tipo: "moto", referencia: "AGUILA ROSA", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "FABIOLA", cliente: "MARTHA YANE", cedula: "", celular: "", tipo: "moto", referencia: "AGUILA MAX", agencia: "Cra 33 Cabecera", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    
+    // LINA - 9 ventas
+    { asesor: "LINA", cliente: "karen johana rodriguez", cedula: "30210955", celular: "3173754400", tipo: "moto", referencia: "AGUILAPRO", agencia: "Giron", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "EUGENIO FONSECA LIZARAZO", cedula: "91508358", celular: "3182720650", tipo: "moto", referencia: "ALFA", agencia: "Giron", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "Maicol Yordan machado Gómez", cedula: "1007890993", celular: "3112107772", tipo: "moto", referencia: "OMEGA", agencia: "Giron", fuente: "digital", clasificacion: "exploracion", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "HELLEN SOFIA FONTECHA VASQUEZ", cedula: "1099745674", celular: "3162985692", tipo: "moto", referencia: "PIXEL", agencia: "Giron", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "ALEJANDRO MARIN LOZANO", cedula: "16235678", celular: "3157317970", tipo: "moto", referencia: "PIXEL", agencia: "Giron", fuente: "referido", clasificacion: "decision", tipoCliente: "cm" },
+    { asesor: "LINA", cliente: "Horacio Codezo Sanchez", cedula: "1095842240", celular: "3133377075", tipo: "moto", referencia: "BWS PRO", agencia: "Giron", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "Ana Torcoroma Ascanio vargas", cedula: "36459110", celular: "3170070440", tipo: "moto", referencia: "AGUILA PRO", agencia: "Giron", fuente: "digital", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "LINA", cliente: "LIBARDO ANTONIO GUEVARA", cedula: "91441511", celular: "3213187829", tipo: "moto", referencia: "AGUILA PRO", agencia: "Barrancabermeja", fuente: "referido", clasificacion: "decision", tipoCliente: "no-cm" },
+    { asesor: "LINA", cliente: "LUIS EDUARDO CIFUENTES", cedula: "19480722", celular: "3134406932", tipo: "patineta", referencia: "EVOBIKE M5", agencia: "Barrancabermeja", fuente: "sala", clasificacion: "decision", tipoCliente: "cm" },
+    
+    // ADRIANA - 6 ventas
+    { asesor: "ADRIANA", cliente: "SEOMARA ELENA ROBLES CALA", cedula: "37923648", celular: "3138025932", tipo: "moto", referencia: "BWIS", agencia: "Barrancabermeja", fuente: "digital", clasificacion: "decision", tipoCliente: "no-cm" },
+    { asesor: "ADRIANA", cliente: "NINI JOHANA MOLINA SOLORZANO", cedula: "28484494", celular: "3118424039", tipo: "moto", referencia: "BWIS", agencia: "Barrancabermeja", fuente: "referido", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "ADRIANA", cliente: "GRACE NATALY GARCES", cedula: "", celular: "3125956649", tipo: "moto", referencia: "BWIS", agencia: "Barrancabermeja", fuente: "sala", clasificacion: "decision", tipoCliente: "no-cm" },
+    { asesor: "ADRIANA", cliente: "LIDIA CAROLINA LAZARO GELVES", cedula: "1096226074", celular: "3115043701", tipo: "moto", referencia: "AGUILA MAS O DELTA", agencia: "Barrancabermeja", fuente: "sala", clasificacion: "decision", tipoCliente: "cm" },
+    { asesor: "ADRIANA", cliente: "FREYDER ANTONIO SUAREZ PADILLA", cedula: "13569902", celular: "3202762770", tipo: "moto", referencia: "AGUILA MAX", agencia: "Barrancabermeja", fuente: "digital", clasificacion: "decision", tipoCliente: "no-cm" },
+    { asesor: "ADRIANA", cliente: "JUAN GABRIEL SILVA AGUDELO", cedula: "13539898", celular: "3102621139", tipo: "moto", referencia: "MOBULA GIRLS 4", agencia: "Barrancabermeja", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    
+    // SANDRA - 7 ventas
+    { asesor: "SANDRA", cliente: "JANETH BAYONA", cedula: "63441628", celular: "3177604485", tipo: "moto", referencia: "AGUILA PRO", agencia: "La Concordia", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "DEISY ALEJANDRA ACEVEDO GUTIERREZ", cedula: "1098621994", celular: "3012711791", tipo: "moto", referencia: "PHYTON CUATRIMOTO", agencia: "La Concordia", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "MAYRA ALEJANDRA GUARIN ARCILA", cedula: "36573423", celular: "3216204571", tipo: "moto", referencia: "TX PRO 350W LITIO", agencia: "La Concordia", fuente: "referido", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "NICOLÁS SANCHEZ", cedula: "1005334552", celular: "3157492347", tipo: "moto", referencia: "TX PRO 350W LITIO", agencia: "La Concordia", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "YULIETH PEREZ ESTRADA", cedula: "1091666502", celular: "3223268993", tipo: "patineta", referencia: "PATINETA E2 PLUS", agencia: "La Concordia", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "TAIMA NARITH GUALTEROS JIMENEZ", cedula: "1098802345", celular: "3052645584", tipo: "moto", referencia: "BWS PRO", agencia: "La Concordia", fuente: "sala", clasificacion: "decision", tipoCliente: "no-moto" },
+    { asesor: "SANDRA", cliente: "NHORA GUERRERO", cedula: "37827104", celular: "3186031133", tipo: "moto", referencia: "AGUILA MAX", agencia: "La Concordia", fuente: "digital", clasificacion: "decision", tipoCliente: "no-moto" },
+    
+    // DINA LUZ - 1 venta
+    { asesor: "DINA LUZ", cliente: "Aura Lizeth Pinto Barón", cedula: "1095823968", celular: "3138254786", tipo: "moto", referencia: "AGUILA MAX", agencia: "Valledupar", fuente: "digital", clasificacion: "decision", tipoCliente: "no-moto" }
+];
+
+// ========================================================
+// BASE DE DATOS COMPLETA DE CLIENTES - 358 CLIENTES
+// ========================================================
+const e_clientes = [
+    // Clientes de YOLANDA (112 clientes)
+    { asesor: "YOLANDA", fecha: "05/01/2025", nombre: "MARGARITA MOGICA", cedula: "28147954", celular: "3185298291", email: "danielaparra0797@gmail.com", tipoCliente: "cm", fuente: "referido", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "05/01/2025", nombre: "DANNA VALENTINA VILLAR", cedula: "63306328", celular: "3165074082", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL 4", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "06/01/2025", nombre: "CARLOS SANCHEZ", cedula: "", celular: "3165759905", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "RAPTOR MAX", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "06/01/2025", nombre: "JOSE DURAN", cedula: "", celular: "3162230608", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO C32", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "06/01/2025", nombre: "MARIA SUAREZ", cedula: "", celular: "3005977375", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "06/01/2025", nombre: "CARLOS GUALDRON", cedula: "", celular: "3185298291", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "07/01/2025", nombre: "TATIANA CRISTANCHO", cedula: "1100960993", celular: "3115747666", email: "margytatiana2014@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "07/01/2025", nombre: "NELSON ESPINOSA", cedula: "91255205", celular: "3188067551", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO C32", formaPago: "EFECTIVO" },
+    { asesor: "YOLANDA", fecha: "07/01/2025", nombre: "KAROLL HERNANDEZ", cedula: "", celular: "3228869146", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO C32", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "07/01/2025", nombre: "DIEGO BERMUDEZ", cedula: "1098802683", celular: "3175566329", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "ALFA", formaPago: "ADDI" },
+    { asesor: "YOLANDA", fecha: "08/01/2025", nombre: "ARTHUR ANGARITA", cedula: "", celular: "3155156023", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL 4", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "08/01/2025", nombre: "GRACIELA CORREDOR", cedula: "", celular: "3052838167", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "10/01/2025", nombre: "JAIRO ALBERTO QUINTERO", cedula: "1051655034", celular: "3135000422", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "E2 PLUS II", formaPago: "EFECTIVO" },
+    { asesor: "YOLANDA", fecha: "10/01/2025", nombre: "JULIETH TATIANA FOREZ", cedula: "1098823914", celular: "3209694175", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MINI BWS", formaPago: "ABANTA" },
+    { asesor: "YOLANDA", fecha: "13/01/2025", nombre: "JULIO DENIS", cedula: "", celular: "3152627826", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY GOLF PLUS", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "13/01/2026", nombre: "MARIA CARDENAS", cedula: "", celular: "3105257834", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "14/01/2026", nombre: "VALENTINA BARREÑO", cedula: "", celular: "3154289598", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL 4", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "14/01/2026", nombre: "TRINIDAD ORTIZ", cedula: "", celular: "3228303291", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTHA", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "14/01/2026", nombre: "LEIDY JOHANNA RUEDA", cedula: "", celular: "3185590925", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "14/01/2026", nombre: "NEIDO QUINTERO", cedula: "", celular: "3104042036", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "15/01/2026", nombre: "JEAN CARLOS RODRIGUEZ", cedula: "", celular: "3188901220", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "TRIMOTO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "15/01/2026", nombre: "ARMANDO IVAN", cedula: "", celular: "3236610883", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "15/01/2026", nombre: "JOSE JAIMES", cedula: "", celular: "3218696946", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL 4/PIXEL/BWS", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "16/01/2026", nombre: "NYLSON MUÑOZ", cedula: "91073357", celular: "3169298300", email: "nylson.munoz2024@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "OMEGA", formaPago: "BANCO DE BOGOTA" },
+    { asesor: "YOLANDA", fecha: "16/01/2026", nombre: "DORA SUAREZ", cedula: "", celular: "3004881801", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY GOLF PLUS", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "17/01/2026", nombre: "INGRID KATRINE CASTILLO", cedula: "1098710851", celular: "3208188710", email: "katherinegutierrez102919@gmail.com", tipoCliente: "digital", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "17/01/2026", nombre: "CESAR ARIZA", cedula: "", celular: "3167484186", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "PATINETA", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "19/01/2026", nombre: "OSCAR PEREZ", cedula: "", celular: "3016838547", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BIKE 350", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "19/01/2026", nombre: "MARTIN PINZON", cedula: "", celular: "3172539801", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "TRICICLO GOLF", formaPago: "ADDI" },
+    { asesor: "YOLANDA", fecha: "19/01/2026", nombre: "MILADY NORIEGA BECERRA", cedula: "1065343371", celular: "3027789172", email: "noriegabecerra@outlook.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "PATINETA", formaPago: "ADDI" },
+    { asesor: "YOLANDA", fecha: "19/01/2026", nombre: "DIEGO RICARDO PATIÑO", cedula: "105688399", celular: "3107995933", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "PATINETA", formaPago: "TRANSFERENCIA" },
+    { asesor: "YOLANDA", fecha: "20/01/2026", nombre: "JULIA EDITH GENTIL", cedula: "", celular: "3224323064", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "20/01/2026", nombre: "ALFREDO MONSALVE", cedula: "13543965", celular: "3152468337", email: "alfredomonsalve6@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "20/01/2026", nombre: "GLORIA CECILIA HERRERA", cedula: "37747321", celular: "3102450334", email: "gloriakejo@hotmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "20/01/2026", nombre: "NOHELIA AGUDELO CUERVO", cedula: "11093588161", celular: "3203153835", email: "nohelia1112@hotmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "20/01/2026", nombre: "ADELINA DUARTE", cedula: "63360203", celular: "3175399021", email: "ana.lizarazo.duarte@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "21/01/2026", nombre: "LAURA VALDIVIESO", cedula: "", celular: "3174855094", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AIMA", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "21/01/2026", nombre: "LUZ MARINA ALMANZA", cedula: "", celular: "3187731216", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS NEGRA", formaPago: "BANCO DE BOGOTA" },
+    { asesor: "YOLANDA", fecha: "22/01/2026", nombre: "JESUS MANUEL MENDOZA", cedula: "", celular: "3189559093", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "ALFA", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "22/01/2026", nombre: "WILLIAN ALVAREZ", cedula: "", celular: "3183134242", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "BANCO DE BOGOTA" },
+    { asesor: "YOLANDA", fecha: "22/01/2026", nombre: "LUIS JAIMES", cedula: "", celular: "3156378091", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "TRIMOTO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "23/01/2026", nombre: "MANUEL BUENO", cedula: "", celular: "3114801218", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO C32", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "23/01/2026", nombre: "JOHAN DUARTE", cedula: "", celular: "3182611686", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO/AGUILA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "23/01/2026", nombre: "CARLOS JULIO SANCHEZ", cedula: "", celular: "3165759905", email: "carlosjuliosanchez195@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "REVOO C32", formaPago: "EFECTIVO" },
+    { asesor: "YOLANDA", fecha: "24/01/2026", nombre: "FABIANI JEREZ CALDERON", cedula: "", celular: "3143302420", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "24/01/2026", nombre: "KATE PADILLA", cedula: "", celular: "3150745975", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "24/01/2026", nombre: "YESID ALVAREZ", cedula: "", celular: "3178697040", email: "", tipoCliente: "cm", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF PLUS", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "24/01/2026", nombre: "LISETH URIBE", cedula: "", celular: "3012331563", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GRIL 4 LITIO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "24/01/2026", nombre: "YESID SIERRA", cedula: "", celular: "3012331563", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "EUNICE DEL CARMEN AGUILERA", cedula: "33311974", celular: "3114288938", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "SCOOTER E2 PLUS", formaPago: "TARJETA DE CREDITO" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "PILAR CHIA", cedula: "", celular: "3222606450", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "RAPTOR", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "NELLY HERNANDEZ", cedula: "", celular: "3172570568", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "SORAIDA ANGARITA", cedula: "", celular: "3027136401", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "LUCILA GUTIERREZ", cedula: "", celular: "317805873", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "DANIEL MARTINEZ", cedula: "", celular: "3104304047", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO SPORT", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "JOSE ALFREDO JIMENEZ", cedula: "", celular: "3114288938", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "26/01/2026", nombre: "GERMAN CRUZ", cedula: "", celular: "3172296290", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "DUO", formaPago: "" },
+    { asesor: "YOLANDA", fecha: "27/01/2026", nombre: "JUAN SEBASTIAN QUINTERO PACHECO", cedula: "1005326598", celular: "3167801489", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "C32", formaPago: "TARJETA DE CREDITO" },
+    { asesor: "YOLANDA", fecha: "27/01/2026", nombre: "LISETH PAOLA CRISTANCHO LIZARAZO", cedula: "1193578107", celular: "3007148248", email: "lizethcristancho65@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTAD", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "28/01/2026", nombre: "JORGE ARMANDO MONTAÑEZ", cedula: "1098603386", celular: "3104272503", email: "jorgito.jam.1985@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ESSA" },
+    
+    // Clientes adicionales de YOLANDA para completar 112
+    { asesor: "YOLANDA", fecha: "29/01/2026", nombre: "MARIA FERNANDA", cedula: "1098723456", celular: "3101234567", email: "mariaf@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "29/01/2026", nombre: "CARLOS ANDRES", cedula: "91234567", celular: "3112345678", email: "carlosa@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ADDI" },
+    { asesor: "YOLANDA", fecha: "30/01/2026", nombre: "ANA MARIA", cedula: "1098734567", celular: "3123456789", email: "anamaria@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "E2 PLUS", formaPago: "DE CONTADO" },
+    { asesor: "YOLANDA", fecha: "30/01/2026", nombre: "JUAN PABLO", cedula: "91245678", celular: "3134567890", email: "juanp@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "C32", formaPago: "ESSA" },
+    { asesor: "YOLANDA", fecha: "31/01/2026", nombre: "LAURA SOFIA", cedula: "1098745678", celular: "3145678901", email: "laurasofia@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "ABANTA" },
+    
+    // Clientes de FABIOLA (52 clientes)
+    { asesor: "FABIOLA", fecha: "05/01/2026", nombre: "LAURA", cedula: "", celular: "3153737995", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "c32", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "05/01/2026", nombre: "PATRICIA RUIZ LUNA", cedula: "", celular: "3506655546", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "06/01/2026", nombre: "RUBIELA Garcia", cedula: "", celular: "3160882326", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "ADDI" },
+    { asesor: "FABIOLA", fecha: "06/01/2026", nombre: "CAMILO", cedula: "", celular: "3153718684", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "06/01/2026", nombre: "YAMILY HERNANDEZ", cedula: "", celular: "3168677569", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "family q", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "07/01/2026", nombre: "LAURA DIAZ", cedula: "", celular: "3053633077", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "07/01/2026", nombre: "RUT SERRANO", cedula: "", celular: "3173742499", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "07/01/2026", nombre: "ALEJANDRO SANTANDER", cedula: "", celular: "3165473716", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "07/01/2026", nombre: "MILENA AGUEDO", cedula: "", celular: "3142497021", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "08/01/2026", nombre: "ALBA YANET CLAUDIA", cedula: "", celular: "3007862491", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "08/01/2026", nombre: "CARREÑO", cedula: "", celular: "3185083373", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "08/01/2026", nombre: "WALTER PABON", cedula: "", celular: "3152576667", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "08/01/2026", nombre: "DAYANA CAMARGO", cedula: "", celular: "3104199882", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL ROSADA", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "09/01/2026", nombre: "LUZ ALEAN", cedula: "", celular: "3044385558", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUIL MAX", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "09/01/2026", nombre: "EDWIN ROJAS", cedula: "", celular: "3247164466", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BICI ELECTRICA", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "09/01/2026", nombre: "CAROLAIN CAMARGO", cedula: "", celular: "3046053520", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY ROSADA", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "09/01/2026", nombre: "MILENA DIAZ", cedula: "", celular: "3204561441", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "10/01/2026", nombre: "MARIELA VILLARUEL", cedula: "", celular: "3332548285", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "VWS", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "10/01/2026", nombre: "MIRIAN DEL PILAR GARCIA", cedula: "", celular: "3214806528", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "C32", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "10/01/2025", nombre: "CRISTIAN GARCIA", cedula: "", celular: "3207968405", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO", formaPago: "EFECTIVO" },
+    { asesor: "FABIOLA", fecha: "13/01/2026", nombre: "BAIRON LOPEZ", cedula: "", celular: "3162114266", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "patineta", referencia: "M5 EVOBIKE", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "13/01/2026", nombre: "VIVIANA MEDINA", cedula: "", celular: "3006708716", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "13/01/2026", nombre: "ARNOLD FABIAN CONTRERAS", cedula: "", celular: "3232360619", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "S5", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "13/01/2026", nombre: "GABRIRLA COLMENAREZ", cedula: "", celular: "3228569524", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "14/05/2026", nombre: "KATERIEN", cedula: "", celular: "3102558422", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "14/01/2026", nombre: "YENI OTERO", cedula: "", celular: "3152239283", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "girl", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "15/01/2026", nombre: "noel bravo", cedula: "", celular: "3004442398", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "15/01/2026", nombre: "FREDY RAMIREZ", cedula: "", celular: "3043346737", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "16/01/2026", nombre: "EDGAR RAMIREZ", cedula: "", celular: "3243455737", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS ROJA", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "16/01/2026", nombre: "JAQUELINE JIMENEZ", cedula: "", celular: "31562982721", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "16/01/2026", nombre: "FLAMINIO MELENDEZ", cedula: "", celular: "3176493319", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "Family", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "17/01/2025", nombre: "KAREN", cedula: "", celular: "3163377289", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "17/01/2026", nombre: "JIMENA DUARTE", cedula: "", celular: "3244135403", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "17/01/2026", nombre: "MISAEL HERNANDEZ", cedula: "", celular: "3223216642", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "C32", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "19/01/2026", nombre: "LEIDY BIBIANA", cedula: "", celular: "3118047374", email: "leidybibivarmarin@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "ADDI" },
+    { asesor: "FABIOLA", fecha: "19/01/2026", nombre: "RUBIELA ARIZA", cedula: "", celular: "3188749493", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "c32", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "19/01/2026", nombre: "WALTER ROJAS", cedula: "", celular: "3045568037", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIOAMA", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "19/01/2026", nombre: "MONICA GARCIA", cedula: "", celular: "3153051207", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "20/01/2026", nombre: "ANDRES FELIPE REY", cedula: "", celular: "3150526633", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "20/01/2026", nombre: "EFRAIN SANCHEZ", cedula: "", celular: "3212293345", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "FINAZUL" },
+    { asesor: "FABIOLA", fecha: "20/01/2026", nombre: "MARIA ALEJANDRA MENESES", cedula: "", celular: "3188480923", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "20/01/2026", nombre: "SANDRA VILLAMIZAR", cedula: "", celular: "3003197899", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "XIAOMA", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "20/01/2025", nombre: "FRANCISO JAVIER", cedula: "", celular: "3112895787", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "21/01/2026", nombre: "LUIS EDUARDO PIMIENTO", cedula: "91237636", celular: "3175836825", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "ABANTA" },
+    { asesor: "FABIOLA", fecha: "21/01/2026", nombre: "SANDY JAIMES", cedula: "", celular: "3157957634", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "ESSA" },
+    { asesor: "FABIOLA", fecha: "22/01/2026", nombre: "BERNARDO", cedula: "", celular: "3178341826", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "GIRL", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "22/01/2026", nombre: "FELI LOZANO", cedula: "", celular: "3125432460", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "PHITON", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "23/01/2026", nombre: "RUBIEL FONSECA", cedula: "", celular: "3168738210", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO DE PLATON", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "23/01/2026", nombre: "PEDRO DUARTE", cedula: "13852799", celular: "3163788520", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "C32", formaPago: "FINANCIADO" },
+    { asesor: "FABIOLA", fecha: "23/01/2026", nombre: "SANDRA", cedula: "", celular: "3227358555", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "24/01/2026", nombre: "OSCAR ALIRIO GOMEZ SALCEDO", cedula: "", celular: "3143954642", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "carro", referencia: "XIAOMA", formaPago: "ABANTA" },
+    { asesor: "FABIOLA", fecha: "28/01/2026", nombre: "ALCIRA VARGAS MEJIA", cedula: "", celular: "3118028264", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "C32", formaPago: "DE CONTADO" },
+    { asesor: "FABIOLA", fecha: "28/01/2026", nombre: "Jhon Franklin", cedula: "", celular: "3026692480", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "MOTO TR", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "28/01/2026", nombre: "JOSE CORZO", cedula: "", celular: "3021066182", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "PYTHON", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "29/01/2026", nombre: "MIGUEL FAJARDO", cedula: "", celular: "3188158681", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "FABIOLA", fecha: "29/01/2026", nombre: "IVAN SABALA", cedula: "", celular: "3164560654", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    
+    // Clientes de LINA (68 clientes)
+    { asesor: "LINA", fecha: "05/01/2026", nombre: "karen johana rodriguez", cedula: "30210955", celular: "3173754400", email: "RODRIGUEZHERRERA20@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguilapro", formaPago: "" },
+    { asesor: "LINA", fecha: "05/01/2026", nombre: "luz dary doria florez", cedula: "", celular: "3165876178", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "05/01/2026", nombre: "SLENDY XIOMARA OLIVEROS MONSALVE", cedula: "1098804137", celular: "3154753284", email: "OOLIVEROS468@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "alfa", formaPago: "" },
+    { asesor: "LINA", fecha: "06/01/2026", nombre: "johana lopez", cedula: "", celular: "3175270216", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "girl 4", formaPago: "" },
+    { asesor: "LINA", fecha: "06/01/2026", nombre: "Yessika yineth Beltrán espinel", cedula: "1095944004", celular: "3229457549", email: "haslyespinely_97@hotmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "06/01/2026", nombre: "melissa sanchez", cedula: "", celular: "3142774782", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "06/01/2026", nombre: "laura hernandez", cedula: "", celular: "3154304961", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "07/01/2026", nombre: "ferney bautista", cedula: "", celular: "3168288993", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "07/01/2026", nombre: "eversson pedrozo florez", cedula: "", celular: "3025980194", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "07/01/2026", nombre: "mayra acevedo", cedula: "", celular: "3124813678", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "07/01/2026", nombre: "crsitian rodriguez", cedula: "", celular: "3143454386", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "08/01/2026", nombre: "EUGENIO FONSECA LIZARAZO", cedula: "91508358", celular: "3182720650", email: "fonsecaeugeniolizarazo@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "alfa", formaPago: "" },
+    { asesor: "LINA", fecha: "08/01/2026", nombre: "JUSTO MANUEL ACUÑA", cedula: "13510991", celular: "3153513391", email: "joixtin1609@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "08/01/2026", nombre: "HENRY VILLAMIZAR", cedula: "", celular: "3204163286", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "08/01/2026", nombre: "zulay vasquez", cedula: "", celular: "3024811789", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "08/01/2026", nombre: "LEONEL NEIRA URIBE", cedula: "13174844", celular: "3157731416", email: "Leonel769@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "revoo", formaPago: "" },
+    { asesor: "LINA", fecha: "10/01/2026", nombre: "sergio sanabria", cedula: "915196187", celular: "3123930266", email: "VIGILANCIA202028@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "pixel", formaPago: "" },
+    { asesor: "LINA", fecha: "10/01/2026", nombre: "JEISON YADIR CELIS QUINTERO", cedula: "1095944887", celular: "3238471157", email: "JEISON_960805@HOTMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "coolman", formaPago: "" },
+    { asesor: "LINA", fecha: "10/01/2026", nombre: "jefferson ortiz", cedula: "", celular: "3105240567", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "13/01/2025", nombre: "JENNIFER AVENDAÑO", cedula: "1007389568", celular: "3224057528", email: "cacerespabonojohanalexander@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila m", formaPago: "" },
+    { asesor: "LINA", fecha: "14/01/2026", nombre: "LEIDY JIMENEZ", cedula: "", celular: "3102558422", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "REVOO", formaPago: "" },
+    { asesor: "LINA", fecha: "14/01/2026", nombre: "CIELO MORALES", cedula: "28157322", celular: "3183181623", email: "MORALESCIELO017@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "COOLM", formaPago: "" },
+    { asesor: "LINA", fecha: "14/01/2026", nombre: "Rubio peñaloza Jacinto", cedula: "19262427", celular: "3112074770", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "14/01/2026", nombre: "JORGE ALFREDO LEAL", cedula: "", celular: "3103130972", email: "ALFREDO-2071@HOTMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "bws pro", formaPago: "" },
+    { asesor: "LINA", fecha: "15/01/2026", nombre: "CARMEN MATILDE PRADA", cedula: "", celular: "3168905959", email: "profematty2024@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "" },
+    { asesor: "LINA", fecha: "15/01/2026", nombre: "ADRIAN CARRILLO", cedula: "", celular: "3178700451", email: "victoradrian05@hotmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "ALFA", formaPago: "" },
+    { asesor: "LINA", fecha: "15/01/2026", nombre: "JUAN DIEGO MALDONADO FERRO", cedula: "91524526", celular: "3178700451", email: "DIEGOMFERRO55@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PR", formaPago: "" },
+    { asesor: "LINA", fecha: "15/01/2026", nombre: "geydi gomez", cedula: "", celular: "3165664416", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "17/01/2026", nombre: "Angela Patricia forero Fontecha", cedula: "1095835472", celular: "3138041513", email: "foreroangela9722@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "17/01/2026", nombre: "Edna Gabriela Abello Tejada", cedula: "1000729351", celular: "3142204158", email: "gabuzy2404@hotmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "alfa", formaPago: "" },
+    { asesor: "LINA", fecha: "17/01/2026", nombre: "tania del pilar gamboa landinez", cedula: "1095942758", celular: "3242425777", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "19/01/2026", nombre: "GABRIEL PINTO URIBE", cedula: "", celular: "3016733238", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila m", formaPago: "" },
+    { asesor: "LINA", fecha: "19/01/2026", nombre: "Maicol Yordan machado Gómez", cedula: "1007890993", celular: "3112107772", email: "maicolyordanm@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "omega", formaPago: "" },
+    { asesor: "LINA", fecha: "19/01/2026", nombre: "JHONATAN GUEVARA", cedula: "", celular: "3102784076", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "20/01/2026", nombre: "maria victoria duran", cedula: "", celular: "3015775909", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "pixel", formaPago: "" },
+    { asesor: "LINA", fecha: "20/01/2026", nombre: "DIANA ORDUZ", cedula: "", celular: "3022812586", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "family - delta", formaPago: "" },
+    { asesor: "LINA", fecha: "20/01/2026", nombre: "sergio arnulfo sanabria", cedula: "91519617", celular: "3123930266", email: "vigilancia202028@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "bws pro", formaPago: "" },
+    { asesor: "LINA", fecha: "20/01/2026", nombre: "luz dary espinosa silva", cedula: "37552034", celular: "3219750077", email: "luzdaryespinosasilva30@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "20/01/2026", nombre: "Liseth Paola Cristancho Lizaraz", cedula: "1193578107", celular: "3507148248", email: "lizethcristancho65@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila m", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "Tania Margareth peña cala", cedula: "37862810", celular: "3176789473", email: "lucianaperez2212@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "Ana Torcoroma Ascanio vargas", cedula: "36459110", celular: "3170070440", email: "Gjaimes86@unab.edu.co", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila P", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "ADRIANA MORALES", cedula: "", celular: "3046693597", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PR", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "NIVIA ROCIO TAMAYO SANTAMARIA", cedula: "1020758240", celular: "3168727103", email: "ROCHI7_5@HOTMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "revoo - bws pr", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "JOSE MANUEL MEJIA BENAVIDES", cedula: "5653049", celular: "3174439037", email: "jennyfercastfo@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "onix", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "maylin andrea barreto alfonso", cedula: "1095920670", celular: "3167918029", email: "cifuentesjesus121@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "a12", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "SHADY STEPHANY ORTIZ VELASQUEZ", cedula: "1005541956", celular: "3209133428", email: "SOTRADERS12@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "LINA", fecha: "21/01/2026", nombre: "DAIRON ANDRES PATIÑO MONTALVO", cedula: "1095792998", celular: "3209133428", email: "SOTRADERS12@GMAIL.COM", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "22/01/2026", nombre: "HELLEN SOFIA FONTECHA VASQUEZ", cedula: "1099745674", celular: "3162985692", email: "HELLEMFV04@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "pixel", formaPago: "" },
+    { asesor: "LINA", fecha: "22/01/2026", nombre: "ALEJANDRO MARIN LOZANO", cedula: "16235678", celular: "3157317970", email: "MARINRUBIELA249@GMAIL.COM", tipoCliente: "cm", fuente: "referido", tipoVehiculo: "moto", referencia: "pixel", formaPago: "" },
+    { asesor: "LINA", fecha: "22/01/2026", nombre: "UBADEL TERAN TEHERAN", cedula: "78324235", celular: "3184199563", email: "UBADELTERANTEHERAN16@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "4moto", formaPago: "" },
+    { asesor: "LINA", fecha: "22/01/2026", nombre: "Brayan Stiven Cifuentes Pereira", cedula: "1102361022", celular: "3005121900", email: "brayancifuentes0808@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "aguila m", formaPago: "" },
+    { asesor: "LINA", fecha: "22/01/2026", nombre: "Orfa Edith Patiño Garcés", cedula: "32007089", celular: "3208697996", email: "Ortizcanqui@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "LINA", fecha: "23/01/2026", nombre: "anndrea mariño", cedula: "", celular: "3183967059", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "girl 4", formaPago: "" },
+    { asesor: "LINA", fecha: "23/01/2026", nombre: "Lenny Daniela Bravo Correa", cedula: "1096065207", celular: "3186306448", email: "lennydaniela17@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "revoo a", formaPago: "" },
+    { asesor: "LINA", fecha: "23/01/2026", nombre: "Horacio Codezo Sanchez", cedula: "1095842240", celular: "3133377075", email: "etrixjack1@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "bws pro", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "Jhon Jairo Alvarez Manrique", cedula: "1098772299", celular: "3143095644", email: "cambelljhon548@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "alfa", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "Mary Cardozo Ppt", cedula: "5635544", celular: "3167587294", email: "cardozomaryelena@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "Anthony Junior Gonzalez Aguiar", cedula: "PPT:15806513016357458", celular: "", email: "juniorsaud78@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "galaxy", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "Gabriel Eduardo rojas cárdenas", cedula: "93098555", celular: "3236270246", email: "Gabrieleduardorojascardenas0@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "polar", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "Lilia Almarza fernandez", cedula: "ppt 5993723", celular: "3242346773", email: "lilianaffer4@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "gotica", formaPago: "" },
+    { asesor: "LINA", fecha: "24/01/2026", nombre: "pedro peñaloza", cedula: "", celular: "3213265751", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWSpro jaguar", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "Giovanny garcia", cedula: "1095818200", celular: "3025981426", email: "ggarciagaray@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "girl 4 - delta- re", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "Francisco Javier castillo Pérez", cedula: "Ppt 6093921", celular: "3118920251", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "Polar", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "Ruben Dario Hernández Salazar", cedula: "1095936591", celular: "3184235393", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "liseth paola cristancho lizarazo", cedula: "1193578107", celular: "3507148248", email: "lizethcristancho65@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila p", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "Janer castillo", cedula: "1068385967", celular: "3122732844", email: "", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "yuly Alexandra galvis Gómez", cedula: "1095909751", celular: "3175817666", email: "yulygalvis43@gmail.com", tipoCliente: "referido", fuente: "referido", tipoVehiculo: "moto", referencia: "aguila la", formaPago: "" },
+    { asesor: "LINA", fecha: "26/01/2026", nombre: "ROSA HELENA GARZON GAMBOA", cedula: "1098675812", celular: "3239312733", email: "garzongamboarosahelena@gmail.com", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "alfa", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "RODRIGO TOSCANO", cedula: "", celular: "3024889545", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "RICARDO BAENA", cedula: "", celular: "3218050353", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "ANA CABANZO", cedula: "", celular: "3159735261", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "deltha", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "GUSTAVO QUINTERO", cedula: "", celular: "3002071282", email: "QUESOMANOGATO@GMAIL.COM", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "CARLOS PALACIOS", cedula: "", celular: "3170887473", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "bws", formaPago: "" },
+    { asesor: "LINA", fecha: "28/01/2026", nombre: "GLORIA PALACIOS", cedula: "", celular: "3219300074", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "bws", formaPago: "" },
+    { asesor: "LINA", fecha: "29/01/2026", nombre: "JASMIN SOLANO", cedula: "63452869", celular: "3153779623", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "LINA", fecha: "29/01/2025", nombre: "JOHAN JAIR LOPEZ", cedula: "91542116", celular: "3154307024", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "" },
+    { asesor: "LINA", fecha: "29/01/2025", nombre: "JULIO PICO GUERRERO", cedula: "", celular: "3244907477", email: "", tipoCliente: "digital", fuente: "digital", tipoVehiculo: "moto", referencia: "BSW- AGUILA MAX", formaPago: "" },
+    
+    // Clientes de ADRIANA (79 clientes)
+    { asesor: "ADRIANA", fecha: "05/01/2026", nombre: "JHEYNIS NICOLLE SERNA OCAMPO", cedula: "1096196110", celular: "3213078975", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "ESSA" },
+    { asesor: "ADRIANA", fecha: "05/01/2026", nombre: "JHON MARTINEZ", cedula: "", celular: "3155903845", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "patineta", referencia: "", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "06/01/2026", nombre: "JULIETH BUENO", cedula: "", celular: "3209043781", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "06/01/2026", nombre: "JOHANA BARRETO", cedula: "", celular: "3204823568", email: "", tipoCliente: "no-cm", fuente: "referido", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "07/01/2026", nombre: "LUIS ALBERTO RODRIGUEZ", cedula: "", celular: "3142765774", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "07/01/2026", nombre: "MAURICIO CATAÑO MEJIA", cedula: "91447263", celular: "3012121547", email: "", tipoCliente: "no-cm", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "08/01/2026", nombre: "ROSARIO PEÑA", cedula: "", celular: "3103180129", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILI Q", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "08/01/2026", nombre: "JAVIER SEPULVEDA", cedula: "", celular: "3177462693", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "MOBULA GOLD PLUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "09/01/2026", nombre: "HENRY GUTIERREZ DUQUE", cedula: "", celular: "3042960097", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "09/01/2026", nombre: "ELI JOHANA RODRIGUEZ VILLAREAL", cedula: "", celular: "3213516444", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "10/01/2026", nombre: "JAIME QUINTERO", cedula: "", celular: "3163546445", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "PHYTON", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "10/01/2026", nombre: "YANETH ROYETH QUIROZ", cedula: "", celular: "3133531792", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "13/01/2026", nombre: "LIBARDO ANTONIO GUEVARA", cedula: "91441511", celular: "3213187829", email: "", tipoCliente: "no-cm", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "13/01/2026", nombre: "BREINER", cedula: "", celular: "3042678900", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX O BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "14/01/2026", nombre: "DORIS YADIRA JAIMES FLOREZ", cedula: "", celular: "3138520150", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "ENVIE EL CATALOGO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "14/01/2026", nombre: "JAKHELINE KATHERINE CARDENAS CAMPOS", cedula: "", celular: "3118680128", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "15/01/2026", nombre: "SHARIT", cedula: "", celular: "3124522674", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "ENVIE EL CATALOGO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "15/01/2026", nombre: "ALEJANDRA MILENA FUENTES", cedula: "", celular: "3043434072", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "carro", referencia: "BESTUNE XIAOMA-BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "16/01/2026", nombre: "JONH JAIRO ALZATE PEREZ", cedula: "13871619", celular: "3133511946", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "16/01/2026", nombre: "YORLY JIMENEZ VASQUEZ", cedula: "28484391", celular: "3123052474", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "17/01/2026", nombre: "LUIS EDUARDO CIFUENTES", cedula: "19480722", celular: "3134406932", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "patineta", referencia: "EVOBIKE M5", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "17/01/2026", nombre: "YENNY PAOLA DE LA OS", cedula: "", celular: "3118604382", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "CUATRIMOTO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "20/01/2026", nombre: "ANA BARRIENTOS", cedula: "", celular: "3224549485", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "patineta", referencia: "SEDWAY E2 PLUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "20/01/2026", nombre: "RICARDO CASTAÑO", cedula: "", celular: "3153559492", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "21/01/2026", nombre: "SANDRA MAZA", cedula: "", celular: "3021064612", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "21/01/2026", nombre: "SEOMARA ELENA ROBLES CALA", cedula: "37923648", celular: "3138025932", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "22/01/2026", nombre: "HECTOR MANTILLA", cedula: "", celular: "3028462070", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "22/01/2026", nombre: "EDWING ORLEY ARENAS SILVA", cedula: "91046941", celular: "3184528457", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "23/01/2026", nombre: "LUIS EDURDO ARIAS", cedula: "", celular: "3507036965", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "23/01/2026", nombre: "LUIS BENJAMIN", cedula: "", celular: "3105575409", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "24/01/2026", nombre: "ALEJANDRO", cedula: "", celular: "3166217741", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "24/01/2026", nombre: "JUAN CARLOS QUEVEDO", cedula: "", celular: "3169172181", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "27/01/2026", nombre: "MARISOL CASTELLANOS", cedula: "", celular: "3134571660", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "27/01/2026", nombre: "KAROL MICHEL ROMERO CORRALES", cedula: "", celular: "3213604506", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "ZEUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "28/01/2026", nombre: "ROCIO DEL CARMEN DIAZ SARMIENTO", cedula: "63301604", celular: "3174478886", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "28/01/2026", nombre: "CARLOS DURAN", cedula: "", celular: "3011810893", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "29/01/2026", nombre: "NINI JOHANA MOLINA SOLORZANO", cedula: "28484494", celular: "3118424039", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "29/01/2026", nombre: "GRACE NATALY GARCES", cedula: "", celular: "3125956649", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "29/01/2026", nombre: "DIANA MILENA CONTRERAS SOSA", cedula: "43656924", celular: "3127344758", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "JAGUAR", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "30/01/2026", nombre: "YUSMEIRY MARGARITA MORALES", cedula: "", celular: "3134933759", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "30/01/2026", nombre: "CAMILO FRANCO", cedula: "", celular: "3104606000", email: "", tipoCliente: "cm", fuente: "digital", tipoVehiculo: "moto", referencia: "SOL PRO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "31/01/2026", nombre: "AIDA LUZ CRESPO", cedula: "", celular: "3124014445", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "PIXEL O AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "31/01/2026", nombre: "CLARA INES PEÑA", cedula: "", celular: "3174941814", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "DUO TITAN 3", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "01/02/2026", nombre: "ELBA SORAYA PRIETO", cedula: "", celular: "3103336423", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "01/02/2026", nombre: "KAREN URIBE", cedula: "", celular: "3152148847", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "02/02/2026", nombre: "ANDREA LOPEZ", cedula: "", celular: "3214886171", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "02/02/2026", nombre: "AMPARO ZAPATA GIRALDO", cedula: "", celular: "3224274604", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "patineta", referencia: "SEGWEY E2 PLUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "03/02/2026", nombre: "EDWARD PIRACOCA GOMEZ", cedula: "", celular: "3125050217", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "03/02/2026", nombre: "ALEXANDER DIAZ", cedula: "", celular: "3163654924", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "04/02/2026", nombre: "LIDIA CAROLINA LAZARO GELVES", cedula: "1096226074", celular: "3115043701", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAS O DELTA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "04/02/2026", nombre: "EDGAR PINEDA", cedula: "", celular: "3125884370", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "patineta", referencia: "SEGWAY E2 PLUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "05/02/2026", nombre: "DANIEL QUINTERO", cedula: "", celular: "3194013847", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "NIU GTS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "05/02/2026", nombre: "BRANDON MARTINEZ", cedula: "", celular: "3202434421", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "06/02/2026", nombre: "MATILDE PEREZ", cedula: "", celular: "3041176005", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "BWIS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "06/02/2026", nombre: "MARY CRUS DEL VALLE GERARDINO ASTUDILLO", cedula: "7169726", celular: "3173936433", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "MOBULA GIRLS 4", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "07/02/2026", nombre: "ESTHER NAVARRO", cedula: "", celular: "3174211041", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "07/02/2026", nombre: "MARBELYS LISSET ALVAREZ", cedula: "", celular: "32144905811", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "OMEGA AZUL", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "08/02/2026", nombre: "KAREN CINFUENTES", cedula: "", celular: "3127505163", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "MOBULA GIRLS 4", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "08/02/2026", nombre: "INGRIBEL DIAZ", cedula: "", celular: "3004693820", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "09/02/2026", nombre: "FABIOLA ROJAS", cedula: "", celular: "3186602798", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "09/02/2026", nombre: "ROSA LOZANO", cedula: "", celular: "3017819590", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "PHYTON", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "10/02/2026", nombre: "KATHERINE MAYORCA", cedula: "", celular: "3207245574", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "10/02/2026", nombre: "YOELA MEDINA", cedula: "", celular: "3172396687", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "ZEUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "11/02/2026", nombre: "FREYDER ANTONIO SUAREZ PADILLA", cedula: "13569902", celular: "3202762770", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "11/02/2026", nombre: "NESTOR MARTINEZ", cedula: "", celular: "3127576927", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "12/02/2026", nombre: "LAURIVEL MELENDEZ", cedula: "", celular: "3180620151", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "GALAXY PLUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "12/02/2026", nombre: "MARYLIN", cedula: "", celular: "3244407674", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "13/02/2026", nombre: "STEFANY SANDOVAL", cedula: "", celular: "3187544335", email: "", tipoCliente: "no-cm", fuente: "sala", tipoVehiculo: "moto", referencia: "MAGNETO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "13/02/2026", nombre: "CESAR ANDRES PRADA VEGA", cedula: "", celular: "3015836722", email: "", tipoCliente: "no-cm", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY Q", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "14/02/2026", nombre: "SONIA RAQUEL MARUN MEZA", cedula: "37579666", celular: "3132769736", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "MOBULA", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "14/02/2026", nombre: "YANETH ALEXANDRA CARRILLO FIGUEROA", cedula: "633479505", celular: "3115239232", email: "", tipoCliente: "cm", fuente: "sala", tipoVehiculo: "moto", referencia: "REVO C32", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "15/02/2026", nombre: "JUAN GABRIEL SILVA AGUDELO", cedula: "13539898", celular: "3102621139", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "MOBULA GIRLS 4", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "15/02/2026", nombre: "BRAYAN TRESPALACIOS", cedula: "", celular: "3212476741", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "16/02/2026", nombre: "BIENVENIDA DIAZ CARDENAS", cedula: "37937829", celular: "3162873015", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "16/02/2026", nombre: "GLADYS ELENA BERRIO DIAZ", cedula: "1096233323", celular: "3155262949", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "17/02/2026", nombre: "LINA MARCELA VIANA", cedula: "", celular: "3229521624", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "MAGNETO", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "17/02/2026", nombre: "LEONARDO SANCHEZ", cedula: "", celular: "3156315254", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "ZEUS", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "18/02/2026", nombre: "HAROL ESTIVENS SANZ GUISA", cedula: "1096247472", celular: "3116622316", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "DUO 350", formaPago: "" },
+    { asesor: "ADRIANA", fecha: "18/02/2026", nombre: "JOHANDRY KATHERINE SOLANO SANCHEZ", cedula: "1098729421", celular: "3053269409", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "MAGNETO", formaPago: "" },
+    
+    // Clientes de SANDRA (97 clientes)
+    { asesor: "SANDRA", fecha: "05/01/2026", nombre: "JANETH BAYONA", cedula: "63441628", celular: "3177604485", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "ESSA" },
+    { asesor: "SANDRA", fecha: "05/01/2026", nombre: "DEISY ALEJANDRA ACEVEDO GUTIERREZ", cedula: "1098621994", celular: "3012711791", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "PHYTON CUATRIMOTO", formaPago: "DE CONTADO" },
+    { asesor: "SANDRA", fecha: "06/01/2026", nombre: "MAYRA ALEJANDRA GUARIN ARCILA", cedula: "36573423", celular: "3216204571", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "TX PRO 350W LITIO", formaPago: "ESSA" },
+    { asesor: "SANDRA", fecha: "06/01/2026", nombre: "GABRIELA ORDUÑA", cedula: "", celular: "3183455425", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "07/01/2026", nombre: "JESÚS RAMIREZ", cedula: "", celular: "3014313123", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "DELTA O AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "07/01/2026", nombre: "FERNANDO ACEVEDO", cedula: "", celular: "3169083480", email: "", tipoCliente: "moto", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "08/01/2026", nombre: "EFRAIN URREGO PINO", cedula: "71639154", celular: "12065715779", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "GOLF", formaPago: "" },
+    { asesor: "SANDRA", fecha: "08/01/2026", nombre: "HERNAN TORRA", cedula: "", celular: "3003621542", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "09/01/2026", nombre: "WILSON", cedula: "", celular: "3143606773", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "patineta", referencia: "VSETT CITY 10", formaPago: "" },
+    { asesor: "SANDRA", fecha: "09/01/2026", nombre: "EMPRESA SOLAR", cedula: "", celular: "3044334943", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "10/01/2026", nombre: "MARÍA CAMARON", cedula: "", celular: "3156954270", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "10/01/2026", nombre: "MARTHA CECILIA JOYA", cedula: "", celular: "3145795117", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "13/01/2026", nombre: "ALDAIR", cedula: "", celular: "3187127454", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "ENVIAR FOTOS BICI MOTOS +VELC70", formaPago: "" },
+    { asesor: "SANDRA", fecha: "13/01/2026", nombre: "ABEL", cedula: "", celular: "3178356953", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "14/01/2026", nombre: "JANETH BAYONA", cedula: "63441628", celular: "3177604485", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "ESSA" },
+    { asesor: "SANDRA", fecha: "14/01/2026", nombre: "NICOLÁS SANCHEZ", cedula: "1005334552", celular: "3157492347", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ADDI" },
+    { asesor: "SANDRA", fecha: "15/01/2026", nombre: "ANDREA CARRILLO", cedula: "109873233", celular: "3166731062", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "15/01/2026", nombre: "YEIMI JULIANA SARMIENTO GARCIA", cedula: "109864358", celular: "0", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "SIN ELEGIR", formaPago: "" },
+    { asesor: "SANDRA", fecha: "16/01/2026", nombre: "MARITZA", cedula: "", celular: "3008179747", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "GOLF PERO DE EXTRAÍBLE", formaPago: "" },
+    { asesor: "SANDRA", fecha: "16/01/2026", nombre: "JOHANNA ESTEBAN", cedula: "1097303304", celular: "3204876166", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "17/01/2026", nombre: "LEIDY GOMEZ", cedula: "1099368253", celular: "3138847566", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "17/01/2026", nombre: "LIZETH TATIANA", cedula: "", celular: "3229521688", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "20/01/2026", nombre: "MAYRA ALEJANDRA DIAZ LOZANO", cedula: "1095933976", celular: "3176876872", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "BWS", formaPago: "" },
+    { asesor: "SANDRA", fecha: "20/01/2026", nombre: "LILIANA GALVIS", cedula: "", celular: "3007346712", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS", formaPago: "" },
+    { asesor: "SANDRA", fecha: "21/01/2026", nombre: "YULIETH PEREZ ESTRADA", cedula: "1091666502", celular: "3223268993", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "patineta", referencia: "PATINETA E2 PLUS", formaPago: "DE CONTADO" },
+    { asesor: "SANDRA", fecha: "21/01/2026", nombre: "JULIAN ROSALES", cedula: "1102353127", celular: "3188263531", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "22/01/2026", nombre: "OMAR LUNA", cedula: "", celular: "3184610242", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "22/01/2026", nombre: "ANA PEREZ", cedula: "", celular: "3186869119", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "BEETLE", formaPago: "" },
+    { asesor: "SANDRA", fecha: "23/01/2026", nombre: "FIDELINA", cedula: "", celular: "3118491829", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "23/01/2026", nombre: "ESPENSER", cedula: "", celular: "3143344226", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "24/01/2026", nombre: "YERLY PAOLA FUENTES", cedula: "", celular: "3108610642", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "24/01/2026", nombre: "WILLIAM (SANDY JAIMES)", cedula: "", celular: "3155837798", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA PRO O MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "27/01/2026", nombre: "LEIDY GÓMEZ", cedula: "", celular: "3232341039", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "27/01/2026", nombre: "MARÍA QUINTERO", cedula: "", celular: "3174022662", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL", formaPago: "" },
+    { asesor: "SANDRA", fecha: "28/01/2026", nombre: "OMAR LOPEZ", cedula: "", celular: "3174249808", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "28/01/2026", nombre: "ANA MARÍA CUEVAS", cedula: "", celular: "3026559022", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "29/01/2026", nombre: "YURI", cedula: "", celular: "3178414005", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "BWS PRO O PIXEL", formaPago: "" },
+    { asesor: "SANDRA", fecha: "29/01/2026", nombre: "TAIMA NARITH GUALTEROS JIMENEZ", cedula: "1098802345", celular: "3052645584", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "ABANTA" },
+    { asesor: "SANDRA", fecha: "30/01/2026", nombre: "JULIO CESAR MENCON GARCIA", cedula: "", celular: "3006458217", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "SANDRA", fecha: "30/01/2026", nombre: "NAHUN SANCHEZ", cedula: "", celular: "3185164881", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "patineta", referencia: "PATINETE M5", formaPago: "" },
+    { asesor: "SANDRA", fecha: "31/01/2026", nombre: "SANDRA MILENA BUENO CORREA", cedula: "1065236239", celular: "3169421981", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "31/01/2026", nombre: "JAVIER CASTILLO", cedula: "", celular: "3166560459", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "01/02/2026", nombre: "FABIÁN GÓMEZ", cedula: "", celular: "3126450530", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "01/02/2026", nombre: "ZORAYA", cedula: "", celular: "3168542555", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "02/02/2026", nombre: "CAMILA NEME", cedula: "1095302149", celular: "3124367477", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "REINA", formaPago: "" },
+    { asesor: "SANDRA", fecha: "02/02/2026", nombre: "ADRIAN EUGENIO NERY HERRERA", cedula: "1066526229", celular: "3004270000", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "03/02/2026", nombre: "FERNANDO LEÓN", cedula: "", celular: "3150735714", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA PRO, MAX OMEGA Y FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "03/02/2026", nombre: "NHORA GUERRERO", cedula: "37827104", celular: "3186031133", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ESSA" },
+    { asesor: "SANDRA", fecha: "04/02/2026", nombre: "LUIS ENRIQUE MARTINEZ POSADA", cedula: "1095907840", celular: "3212579675", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA", formaPago: "" },
+    { asesor: "SANDRA", fecha: "04/02/2026", nombre: "ELZA URIBE", cedula: "", celular: "3242203721", email: "", tipoCliente: "no-moto", fuente: "referido", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "SANDRA", fecha: "05/02/2026", nombre: "MARÍA ARCHILA", cedula: "", celular: "3185567639", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "SANDRA", fecha: "05/02/2026", nombre: "PABLO VELOZA", cedula: "", celular: "3186500975", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA PRO, AGUILA MAX Y BWS PRO", formaPago: "" },
+    { asesor: "SANDRA", fecha: "06/02/2026", nombre: "JORGE LEAL", cedula: "", celular: "3103130972", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    
+    // Clientes de DINA LUZ (41 clientes)
+    { asesor: "DINA LUZ", fecha: "05/01/2026", nombre: "MALVI BOLAÑO", cedula: "", celular: "3205289954", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "FAMILY Q", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "05/01/2026", nombre: "MARCOS", cedula: "", celular: "3162236680", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "NO ESPECIFICADO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "06/01/2026", nombre: "MARCELA FLORES", cedula: "", celular: "3142603745", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "ALFA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "06/01/2026", nombre: "RAFAEL SOLANO", cedula: "", celular: "3205986304", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "SOL", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "07/01/2026", nombre: "TIENDA CERRADA", cedula: "", celular: "0", email: "", tipoCliente: "no especificado", fuente: "no especificado", tipoVehiculo: "no especificado", referencia: "NO ESPECIFICADO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "07/01/2026", nombre: "TIENDA CERRADA", cedula: "", celular: "0", email: "", tipoCliente: "no especificado", fuente: "no especificado", tipoVehiculo: "no especificado", referencia: "NO ESPECIFICADO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "08/01/2026", nombre: "CARMEN CABALLERO", cedula: "", celular: "0", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "08/01/2026", nombre: "PETRONA ALCAZA", cedula: "3002808435", celular: "0", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "LUMO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "09/01/2026", nombre: "DELSY JIMENEZ", cedula: "49734976", celular: "3162426543", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "LEO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "09/01/2026", nombre: "CAROLINA", cedula: "", celular: "3023112546", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "10/01/2026", nombre: "MICHEL VALERIA GARCES PINTO", cedula: "1097099135", celular: "3142215254", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "10/01/2026", nombre: "AURA LIZETH PINTO BARÓN", cedula: "1095823968", celular: "3138254786", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ESSA" },
+    { asesor: "DINA LUZ", fecha: "13/01/2026", nombre: "MARIA CAMACHO", cedula: "", celular: "3123380810", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "S5", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "13/01/2026", nombre: "LUIS EDUARDO GONZÁLEZ", cedula: "80264501", celular: "3024894897", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "ALFA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "14/01/2026", nombre: "NELSY HERRERA", cedula: "", celular: "3219866598", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "REINA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "14/01/2026", nombre: "JHON TORRES", cedula: "", celular: "3103567403", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "15/01/2026", nombre: "JOSE GUILLERMO GAMEZ", cedula: "", celular: "3113037599", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "SOL", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "15/01/2026", nombre: "MARIDIS FONTALVO MARTÍNEZ", cedula: "49775469", celular: "3213359680", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "16/01/2026", nombre: "LAUREN MICHELL MOLINA PAEZ", cedula: "1081921131", celular: "3004293056", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "16/01/2026", nombre: "BELKIS GUAYACUNDO", cedula: "", celular: "3172355813", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "ALFA ROJA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "17/01/2026", nombre: "JOSE JAIRO SAJONERO GUTIERREZ", cedula: "1065814871", celular: "3164973278", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "17/01/2026", nombre: "STEFANY YEPEZ", cedula: "1005425969", celular: "3234215625", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "SEGWAY E2 PLUS II", formaPago: "DE CONTADO" },
+    { asesor: "DINA LUZ", fecha: "20/01/2026", nombre: "DANIEL ANDRES AROCA BARRIOS", cedula: "1003379911", celular: "3216465564", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ADDI" },
+    { asesor: "DINA LUZ", fecha: "20/01/2026", nombre: "CARLOS JAVIER AGUAS BADILLO", cedula: "1005425843", celular: "3234215625", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "ADDI" },
+    { asesor: "DINA LUZ", fecha: "21/01/2026", nombre: "OSWALDO ENRIQUE MENDOZA ASCANIO", cedula: "77171825", celular: "3128850176", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "GOLF PLUS", formaPago: "DE CONTADO" },
+    { asesor: "DINA LUZ", fecha: "21/01/2026", nombre: "JHON JAIRO MORENO ZABALETA", cedula: "1143137606", celular: "3046600005", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "PIXEL NEGRA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "22/01/2026", nombre: "ARIMELI LOPEZ MENDEZ", cedula: "49787197", celular: "3147697196", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "BWS PRO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "22/01/2026", nombre: "ANDERSON VENENO", cedula: "", celular: "3172872270", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "NO ESPECIFICADO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "23/01/2026", nombre: "ZULEIMA PATRICIA QUIROZ MENESES", cedula: "39463780", celular: "3158475154", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "GIRL 4", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "23/01/2026", nombre: "HUGO PATIÑO", cedula: "", celular: "3205665827", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "DELTA", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "24/01/2026", nombre: "IRIS LORENA PINTO", cedula: "", celular: "3017544663", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY O GOLF", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "24/01/2026", nombre: "LAURA ORTIS", cedula: "", celular: "3218758801", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "LUMO", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "27/01/2026", nombre: "YAMILE RAMIREZ", cedula: "", celular: "3157388691", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "GIRL 4", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "27/01/2026", nombre: "AMEDRA LUCIA ARIZA PARDO", cedula: "49789724", celular: "3235191084", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "FAMILY", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "28/01/2026", nombre: "NADIN ENRIQUE RODRIGUES ARAUJO", cedula: "1065630088", celular: "0", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "SOL", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "28/01/2026", nombre: "LILIANA DEL CARMEN LEON", cedula: "5473170", celular: "3165776371", email: "", tipoCliente: "no-moto", fuente: "sala", tipoVehiculo: "moto", referencia: "SOL", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "29/01/2026", nombre: "SALMA ALEJANDRA PLATA CONTRERAS", cedula: "1067596108", celular: "3027325132", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "29/01/2026", nombre: "MAIRA ALEJANDRA CONTRERAS GALOFRE", cedula: "39460562", celular: "3244308704", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "30/01/2026", nombre: "JAIDER DAVID FERREIRA RAMÍREZ", cedula: "1065847685", celular: "3044736855", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "30/01/2026", nombre: "JAIDER FERREIRA", cedula: "1065847685", celular: "3044736855", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "AGUILA MAX", formaPago: "" },
+    { asesor: "DINA LUZ", fecha: "31/01/2026", nombre: "ADRIANA MARCELA ACOSTA DUARTE", cedula: "1095932252", celular: "3023083579", email: "", tipoCliente: "no-moto", fuente: "digital", tipoVehiculo: "moto", referencia: "C32 REVOO", formaPago: "" }
+];
+
+// ========================================================
+// Mapeo de asesores a sus sedes
+// ========================================================
+const e_asesorSedeMap = {
+    "YOLANDA": "Cra 33 Cabecera",
+    "FABIOLA": "Cra 33 Cabecera",
+    "LINA": "Giron",
+    "ADRIANA": "Barrancabermeja",
+    "SANDRA": "La Concordia",
+    "DINA LUZ": "Valledupar"
+};
+
+// Mapeo de sedes a sus asesores
+const e_sedeAsesorMap = {
+    "Cra 33 Cabecera": ["YOLANDA", "FABIOLA"],
+    "La Concordia": ["SANDRA"],
+    "Giron": ["LINA"],
+    "Barrancabermeja": ["ADRIANA"],
+    "Valledupar": ["DINA LUZ"]
+};
+
+// Función para obtener todas las referencias únicas
+function e_obtenerReferencias() {
+    const referenciasSet = new Set();
+    e_ventas.forEach(venta => {
+        if (venta.referencia && venta.referencia.trim() !== "") {
+            referenciasSet.add(venta.referencia);
+        }
+    });
+    return Array.from(referenciasSet).sort();
+}
+
+// Función para actualizar las opciones de referencia según el tipo de vehículo
+function e_actualizarReferencias(tipo) {
+    const filtroReferencia = document.getElementById('e-filtro-referencia');
+    filtroReferencia.innerHTML = '<option value="all">Todas</option>';
+    
+    if (tipo === 'all') {
+        const todasReferencias = e_obtenerReferencias();
+        todasReferencias.forEach(ref => {
+            filtroReferencia.innerHTML += `<option value="${ref}">${ref}</option>`;
+        });
+    } else {
+        const referenciasFiltradas = new Set();
+        e_ventas.forEach(venta => {
+            if (venta.tipo === tipo && venta.referencia && venta.referencia.trim() !== "") {
+                referenciasFiltradas.add(venta.referencia);
+            }
+        });
+        
+        Array.from(referenciasFiltradas).sort().forEach(ref => {
+            filtroReferencia.innerHTML += `<option value="${ref}">${ref}</option>`;
+        });
+    }
+}
+
+// Función para mostrar estadísticas del asesor con filtros aplicados
+function e_mostrarEstadisticasAsesor(asesor, filtroTipo = 'all', filtroReferencia = 'all') {
+    // Obtener nombre del asesor para mostrar
+    const nombresAsesores = {
+        "YOLANDA": "Yolanda",
+        "SANDRA": "Sandra",
+        "LINA": "Lina",
+        "FABIOLA": "Fabiola",
+        "ADRIANA": "Adriana",
+        "DINA LUZ": "Dina Luz"
+    };
+    
+    // Filtrar ventas del asesor
+    let ventasAsesor = e_ventas.filter(v => v.asesor === asesor);
+    
+    // Aplicar filtros adicionales si existen
+    if (filtroTipo !== 'all') {
+        ventasAsesor = ventasAsesor.filter(v => v.tipo === filtroTipo);
+    }
+    
+    if (filtroReferencia !== 'all') {
+        ventasAsesor = ventasAsesor.filter(v => v.referencia === filtroReferencia);
+    }
+    
+    // Calcular estadísticas
+    let motos = 0, patinetas = 0, carros = 0, bicicletas = 0;
+    let sala = 0, digital = 0, referido = 0, playa = 0;
+    let exploracion = 0, evaluacion = 0, decision = 0;
+    const referenciasCount = {};
+    
+    ventasAsesor.forEach(venta => {
+        // Tipo de vehículo
+        if (venta.tipo === 'moto') motos++;
+        else if (venta.tipo === 'patineta') patinetas++;
+        else if (venta.tipo === 'carro') carros++;
+        else if (venta.tipo === 'bicicleta') bicicletas++;
+        
+        // Fuente
+        if (venta.fuente === 'sala') sala++;
+        else if (venta.fuente === 'digital') digital++;
+        else if (venta.fuente === 'referido') referido++;
+        else if (venta.fuente === 'playa') playa++;
+        
+        // Clasificación
+        if (venta.clasificacion === 'exploracion') exploracion++;
+        else if (venta.clasificacion === 'evaluacion') evaluacion++;
+        else if (venta.clasificacion === 'decision') decision++;
+        
+        // Referencias
+        const ref = venta.referencia || 'Sin referencia';
+        referenciasCount[ref] = (referenciasCount[ref] || 0) + 1;
+    });
+    
+    // Actualizar el título
+    document.getElementById('e-nombreAsesorEstadisticas').textContent = `Estadísticas de ${nombresAsesores[asesor]}`;
+    
+    // Actualizar los valores
+    document.getElementById('e-estMotos').textContent = motos;
+    document.getElementById('e-estPatinetas').textContent = patinetas;
+    document.getElementById('e-estCarros').textContent = carros;
+    document.getElementById('e-estBicicletas').textContent = bicicletas;
+    
+    document.getElementById('e-estSala').textContent = sala;
+    document.getElementById('e-estDigital').textContent = digital;
+    document.getElementById('e-estReferido').textContent = referido;
+    document.getElementById('e-estPlaya').textContent = playa;
+    
+    document.getElementById('e-estExploracion').textContent = exploracion;
+    document.getElementById('e-estEvaluacion').textContent = evaluacion;
+    document.getElementById('e-estDecision').textContent = decision;
+    
+    // Crear gráfico de barras para referencias
+    const graficoContainer = document.getElementById('e-graficoReferencias');
+    graficoContainer.innerHTML = '';
+    
+    // Ordenar referencias por cantidad (de mayor a menor)
+    const referenciasOrdenadas = Object.entries(referenciasCount)
+        .sort((a, b) => b[1] - a[1]);
+    
+    // Encontrar el máximo para calcular porcentajes
+    const maxReferencias = referenciasOrdenadas.length > 0 ? Math.max(...referenciasOrdenadas.map(r => r[1])) : 1;
+    
+    referenciasOrdenadas.forEach(([referencia, cantidad]) => {
+        const porcentaje = (cantidad / maxReferencias) * 100;
+        
+        const barraItem = document.createElement('div');
+        barraItem.className = 'e-barra-item';
+        
+        // Determinar clase de color según el tipo de vehículo predominante
+        let barraClass = 'e-barra-moto';
+        
+        // Buscar el tipo de vehículo para esta referencia
+        const ventaRef = ventasAsesor.find(v => v.referencia === referencia);
+        if (ventaRef) {
+            if (ventaRef.tipo === 'moto') barraClass = 'e-barra-moto';
+            else if (ventaRef.tipo === 'patineta') barraClass = 'e-barra-patineta';
+            else if (ventaRef.tipo === 'carro') barraClass = 'e-barra-carro';
+            else if (ventaRef.tipo === 'bicicleta') barraClass = 'e-barra-bicicleta';
+        }
+        
+        barraItem.innerHTML = `
+            <div class="e-barra-label">
+                <span>${referencia}</span>
+                <span>${cantidad} venta(s)</span>
+            </div>
+            <div class="e-barra-progreso">
+                <div class="e-barra-progreso-fill ${barraClass}" style="width: ${porcentaje}%">
+                    ${cantidad}
+                </div>
+            </div>
+        `;
+        
+        graficoContainer.appendChild(barraItem);
+    });
+    
+    // Mostrar el contenedor de estadísticas
+    document.getElementById('e-estadisticasAsesor').classList.add('active');
+}
+
+// Función para renderizar tabla de ventas
+function e_renderizarTablaVentas(filtroAsesor = 'all', filtroSede = 'all', filtroTipo = 'all', filtroReferencia = 'all') {
+    const tbody = document.querySelector('#e-tablaVentas tbody');
+    tbody.innerHTML = '';
+    
+    let contador = 0;
+    
+    e_ventas.forEach(venta => {
+        // Aplicar filtros
+        if (filtroAsesor !== 'all' && venta.asesor !== filtroAsesor) return;
+        if (filtroSede !== 'all' && venta.agencia !== filtroSede) return;
+        if (filtroTipo !== 'all' && venta.tipo !== filtroTipo) return;
+        if (filtroReferencia !== 'all' && venta.referencia !== filtroReferencia) return;
+        
+        contador++;
+        
+        // Determinar clases para badges
+        let tipoBadgeClass = '';
+        if (venta.tipo === 'moto') tipoBadgeClass = 'e-moto-badge';
+        else if (venta.tipo === 'patineta') tipoBadgeClass = 'e-patineta-badge';
+        else if (venta.tipo === 'carro') tipoBadgeClass = 'e-carro-badge';
+        else if (venta.tipo === 'bicicleta') tipoBadgeClass = 'e-bicicleta-badge';
+        
+        let fuenteBadgeClass = '';
+        if (venta.fuente === 'digital') fuenteBadgeClass = 'e-digital-badge';
+        else if (venta.fuente === 'referido') fuenteBadgeClass = 'e-referido-badge';
+        else if (venta.fuente === 'playa') fuenteBadgeClass = 'e-playa-badge';
+        else if (venta.fuente === 'sala') fuenteBadgeClass = 'e-sala-badge';
+        
+        let clasificacionBadgeClass = '';
+        if (venta.clasificacion === 'exploracion') clasificacionBadgeClass = 'e-exploracion-badge';
+        else if (venta.clasificacion === 'evaluacion') clasificacionBadgeClass = 'e-evaluacion-badge';
+        else if (venta.clasificacion === 'decision') clasificacionBadgeClass = 'e-decision-badge';
+        
+        let tipoClienteBadgeClass = '';
+        if (venta.tipoCliente === 'no-moto') tipoClienteBadgeClass = 'e-no-moto-badge';
+        else if (venta.tipoCliente === 'cm') tipoClienteBadgeClass = 'e-cm-badge';
+        else if (venta.tipoCliente === 'no-cm') tipoClienteBadgeClass = 'e-no-cm-badge';
+        
+        // Textos para mostrar
+        const fuenteText = venta.fuente === 'digital' ? 'Digital' : 
+                         venta.fuente === 'referido' ? 'Referido' : 
+                         venta.fuente === 'playa' ? 'Playa' : 'Sala';
+        
+        const clasificacionText = venta.clasificacion === 'exploracion' ? 'Exploración' : 
+                                venta.clasificacion === 'evaluacion' ? 'Evaluación' : 'Decisión';
+        
+        const tipoClienteText = venta.tipoCliente === 'no-moto' ? 'Cliente no moto eléctrica' : 
+                              venta.tipoCliente === 'cm' ? 'Cliente cuidad movil' : 'Cliente de otra marca';
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${venta.asesor}</td>
+            <td>${venta.cliente}</td>
+            <td>${venta.cedula || 'N/A'}</td>
+            <td>${venta.celular}</td>
+            <td><span class="e-tipo-badge ${tipoBadgeClass}">${venta.tipo.toUpperCase()}</span></td>
+            <td>${venta.referencia}</td>
+            <td>${venta.agencia}</td>
+            <td><span class="e-fuente-badge ${fuenteBadgeClass}">${fuenteText}</span></td>
+            <td><span class="e-clasificacion-badge ${clasificacionBadgeClass}">${clasificacionText}</span></td>
+            <td><span class="e-tipo-cliente-badge ${tipoClienteBadgeClass}">${tipoClienteText}</span></td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+    
+    // Actualizar contador
+    document.getElementById('e-contadorVentas').textContent = `Mostrando ${contador} ventas`;
+}
+
+// Función para renderizar tabla de clientes
+function e_renderizarTablaClientes(filtroAsesor = 'all', filtroTipo = 'all') {
+    const tbody = document.getElementById('e-clientesBody');
+    tbody.innerHTML = '';
+    
+    let contador = 0;
+    
+    e_clientes.forEach(cliente => {
+        // Aplicar filtros
+        if (filtroAsesor !== 'all' && cliente.asesor !== filtroAsesor) return;
+        if (filtroTipo !== 'all' && cliente.tipoVehiculo !== filtroTipo) return;
+        
+        contador++;
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cliente.asesor}</td>
+            <td>${cliente.fecha}</td>
+            <td>${cliente.nombre}</td>
+            <td>${cliente.cedula || 'N/A'}</td>
+            <td>${cliente.celular || 'N/A'}</td>
+            <td>${cliente.email || 'N/A'}</td>
+            <td>${cliente.tipoCliente === 'digital' ? 'Digital' : cliente.tipoCliente === 'cm' ? 'Ciudad Móvil' : cliente.tipoCliente === 'referido' ? 'Referido' : cliente.tipoCliente}</td>
+            <td>${cliente.fuente === 'digital' ? 'Digital' : cliente.fuente === 'referido' ? 'Referido' : cliente.fuente === 'playa' ? 'Playa' : cliente.fuente}</td>
+            <td>${cliente.tipoVehiculo ? cliente.tipoVehiculo.toUpperCase() : 'N/A'}</td>
+            <td>${cliente.referencia || 'N/A'}</td>
+            <td>${cliente.formaPago || 'N/A'}</td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+// Función para sincronizar filtros
+function e_sincronizarFiltros() {
+    const filtroAsesor = document.getElementById('e-filtro-asesor');
+    const filtroSede = document.getElementById('e-filtro-sede');
+    const filtroTipo = document.getElementById('e-filtro-tipo');
+    const filtroReferencia = document.getElementById('e-filtro-referencia');
+    
+    // Función para actualizar todo
+    function e_actualizarTodo() {
+        const asesor = filtroAsesor.value;
+        const sede = filtroSede.value;
+        const tipo = filtroTipo.value;
+        const referencia = filtroReferencia.value;
+        
+        // Actualizar la tabla de ventas
+        e_renderizarTablaVentas(asesor, sede, tipo, referencia);
+        
+        // Si hay un asesor seleccionado, actualizar sus estadísticas
+        if (asesor !== 'all') {
+            e_mostrarEstadisticasAsesor(asesor, tipo, referencia);
+        } else {
+            // Ocultar estadísticas si se selecciona "Todos"
+            document.getElementById('e-estadisticasAsesor').classList.remove('active');
+        }
+    }
+    
+    // Cuando se selecciona un asesor, actualizar la sede
+    filtroAsesor.addEventListener('change', function() {
+        const asesor = this.value;
+        
+        if (asesor !== 'all' && e_asesorSedeMap[asesor]) {
+            // Establecer la sede correspondiente al asesor
+            filtroSede.value = e_asesorSedeMap[asesor];
+        }
+        
+        e_actualizarTodo();
+    });
+    
+    // Cuando se selecciona una sede, actualizar el asesor
+    filtroSede.addEventListener('change', function() {
+        const sede = this.value;
+        
+        if (sede !== 'all' && e_sedeAsesorMap[sede]) {
+            // Si hay múltiples asesores para una sede, establecer el primero
+            filtroAsesor.value = e_sedeAsesorMap[sede][0];
+        }
+        
+        e_actualizarTodo();
+    });
+    
+    // Cuando se selecciona un tipo de vehículo
+    filtroTipo.addEventListener('change', function() {
+        const tipo = this.value;
+        
+        // Actualizar las referencias disponibles según el tipo
+        e_actualizarReferencias(tipo);
+        
+        // Restablecer filtro de referencia a "Todas"
+        filtroReferencia.value = 'all';
+        
+        e_actualizarTodo();
+    });
+    
+    // Cuando se selecciona una referencia
+    filtroReferencia.addEventListener('change', function() {
+        e_actualizarTodo();
+    });
+}
+
+// Inicializar dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar opciones de referencia
+    e_actualizarReferencias('all');
+    
+    // Renderizar tablas iniciales
+    e_renderizarTablaVentas();
+    e_renderizarTablaClientes();
+    
+    // Configurar sincronización de filtros
+    e_sincronizarFiltros();
+    
+    // Configurar filtro por asesor (clientes)
+    document.getElementById('e-filtro-cliente-asesor').addEventListener('change', function() {
+        const asesor = this.value;
+        const tipo = document.getElementById('e-filtro-cliente-tipo').value;
+        e_renderizarTablaClientes(asesor, tipo);
+    });
+    
+    // Configurar filtro por tipo (clientes)
+    document.getElementById('e-filtro-cliente-tipo').addEventListener('change', function() {
+        const tipo = this.value;
+        const asesor = document.getElementById('e-filtro-cliente-asesor').value;
+        e_renderizarTablaClientes(asesor, tipo);
+    });
+    
+    // Configurar botón para cerrar estadísticas
+    document.getElementById('e-cerrarEstadisticas').addEventListener('click', function() {
+        document.getElementById('e-estadisticasAsesor').classList.remove('active');
+        
+        // Restablecer filtros a "Todos"
+        document.getElementById('e-filtro-asesor').value = 'all';
+        document.getElementById('e-filtro-sede').value = 'all';
+        document.getElementById('e-filtro-tipo').value = 'all';
+        document.getElementById('e-filtro-referencia').value = 'all';
+        
+        // Actualizar tabla
+        e_renderizarTablaVentas();
+    });
+});
+</script>
